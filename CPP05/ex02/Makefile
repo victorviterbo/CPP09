@@ -6,17 +6,18 @@
 #    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 15:40:14 by vviterbo          #+#    #+#              #
-#    Updated: 2025/07/30 22:32:06 by victorviter      ###   ########.fr        #
+#    Updated: 2025/07/31 10:05:59 by victorviter      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = WorkingBureaucrat
+NAME = Bureaucrat
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 
 INCLUDE = -I./include/
 
-SRCS_MAIN_F = main.cpp Bureaucrat.cpp Form.cpp
+SRCS_MAIN_F =	main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp \
+				RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 
 SRCS = $(addprefix srcs/, $(SRCS_MAIN_F))
 

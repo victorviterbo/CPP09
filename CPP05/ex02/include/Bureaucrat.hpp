@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:56 by victorviter       #+#    #+#             */
-/*   Updated: 2025/07/31 08:59:54 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/07/31 22:16:09 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 #include <string>
 #include <exception>
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	public :
@@ -50,10 +50,14 @@ class Bureaucrat {
 		std::string const	&getName(void) const;
 		unsigned int		getGrade(void) const;
 
-		void				signForm(Form paper);
+		void    			signForm(AForm &form);
+		void   				executeForm(AForm const &form);
 	private :
 		std::string		_name;
 		unsigned int	_grade;
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &operand);
+
+#include <time.h>
+#include <stdint.h>
