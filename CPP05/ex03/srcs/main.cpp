@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/01 14:20:33 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/01 14:29:47 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int main(void)
 {
 	Bureaucrat  A("Victor", 12);
-	Bureaucrat  B("Gratte Papier en Chef", 25);	
+	Intern		sbire;
 	AForm		*forms[9];
 
 	for (int i = 0; i < 3; i++)
-		forms[i] = new PresidentialPardonForm("Form_" + std::to_string(i) + "C.docx");  //l'extention du démon !
+		forms[i] = sbire.makeForm("PresidentialPardonForm", "form_" + std::to_string(i) + "C.docx");
 	for (int i = 3; i < 6; i++)
-		forms[i] = new RobotomyRequestForm("Form_" + std::to_string(i) + "C.docx");
+		forms[i] = sbire.makeForm("RobotomyRequestForm", "form_" + std::to_string(i) + "C.docx");
 	for (int i = 6; i < 9; i++)
-		forms[i] = new ShrubberyCreationForm("Form_" + std::to_string(i) + "C.docx");
+		forms[i] = sbire.makeForm("ShrubberyCreationForm", "form_" + std::to_string(i) + "C.docx");
 	for (int i = 0; i < 9; i++)
 	{
 		try {
