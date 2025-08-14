@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:29 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/02 20:07:11 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/14 16:06:19 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <cmath>
 
 class ScalarConverter {
 	public :
