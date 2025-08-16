@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 15:09:24 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/15 15:56:57 by victorviter      ###   ########.fr       */
+/*   Created: 2025/08/15 15:58:19 by victorviter       #+#    #+#             */
+/*   Updated: 2025/08/15 20:44:00 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
+#pragma once
 
-int main(void)
+#include <iostream>
+
+template <typename T>
+T   max(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+template <typename T>
+T   min(T a, T b) {
+    return (a < b) ? a : b;
+}
+
+template <typename T>
+void    swap(T &a, T &b)
 {
-	Base	*a = new A;
-	Base	*mystery;
+    T   tmp;
 
-	mystery = Base::generate();
-	Base::identify(a);
-	Base::identify(*mystery);
-	delete a;
-	delete mystery;
+    tmp = a;
+    a = b;
+    b = tmp;
 }
