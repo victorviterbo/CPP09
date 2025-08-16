@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/16 14:14:33 by victorviter       #+#    #+#             */
+/*   Updated: 2025/08/16 15:25:56 by victorviter      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "easyfind.hpp"
+
+int main(void)
+{
+	int					arr1[] = {1, 2, 4, 6, 8};
+	int					arr2[] = {'a', 'b', 'c', 'e', 'f'};
+	std::vector<int>	v(arr1, arr1 + 5);
+	std::list<int>		l(arr2, arr2 + 5);
+
+	try {
+		easyfind(v, 3);
+		std::cout << "value found in container" << std::endl;
+	}
+	catch (std::runtime_error &e){
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		easyfind(v, 4);
+		std::cout << "value found in container" << std::endl;
+	}
+	catch (std::runtime_error &e){
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		easyfind(l, 'a');
+		std::cout << "value found in container" << std::endl;
+	}
+	catch (std::runtime_error &e){
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		easyfind(l, 'z');
+		std::cout << "value found in container" << std::endl;
+	}
+	catch (std::runtime_error &e){
+		std::cout << e.what() << std::endl;
+	}
+	return (0);
+}
