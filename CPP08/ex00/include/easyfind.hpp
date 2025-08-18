@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   EasyFind.hpp                                       :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:00:00 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/16 15:24:34 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/18 13:04:10 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 #include <iostream>
 #include <vector>
-#include <array>
 #include <deque>
-#include <forward_list>
 #include <list>
 #include <stack>
 #include <queue>
