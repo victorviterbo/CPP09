@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
+#    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 15:55:45 by victorviter       #+#    #+#              #
-#    Updated: 2025/08/16 18:10:13 by victorviter      ###   ########.fr        #
+#    Updated: 2025/08/18 12:40:43 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = c++
 
 INCLUDE = -I./include/
 
-SRCS_MAIN_F =	main.cpp MutantStack.cpp
+SRCS_MAIN_F =	main.cpp
 
 SRCS = $(addprefix srcs/, $(SRCS_MAIN_F))
 

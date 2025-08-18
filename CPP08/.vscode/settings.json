@@ -47,6 +47,27 @@
         "string_view": "cpp",
         "unordered_map": "cpp",
         "variant": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "span": "cpp",
+        "ranges": "cpp",
+        "random": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cstddef": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "iomanip": "cpp",
+        "iostream": "cpp",
+        "numbers": "cpp",
+        "ostream": "cpp"
     }
 }

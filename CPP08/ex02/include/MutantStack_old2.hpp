@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MutantStack.hpp                                    :+:      :+:    :+:   */
+/*   MutantStack copy.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:55:25 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/18 12:42:26 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/08/18 12:36:30 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,26 @@
 
 #include <iostream>
 #include <stack>
+
 template < typename T >
 class MutantStack : public std::stack<T> {
 	public :
 	// CONSTRUCTORS
-		MutantStack() {};
+		MutantStack();
 
-		MutantStack(MutantStack &other) {this->c = other.c;};
+		MutantStack(MutantStack &other);
 
-		MutantStack &operator=(MutantStack &other){
-			this->c = other.c;
-			return (*this);
-		};
+		MutantStack &operator=(MutantStack &other);
 
 	//DESTUCTORS
-		~MutantStack() {};
+		~MutantStack();
 		
 	//GETTERS
 	//SETTERS
 	//MEMBER FUNCTIONS
 		typedef typename std::stack<T>::container_type::iterator iterator;
 
-		iterator	begin(){
-			return (this->c.begin());
-		};
+		iterator	begin();
 
-		iterator	end(){
-			return (this->c.begin());
-		};
+		iterator	end();
 };
