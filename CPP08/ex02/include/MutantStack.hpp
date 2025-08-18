@@ -6,14 +6,14 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:55:25 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/18 12:42:26 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/08/18 12:52:11 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
 #include <stack>
+
 template < typename T >
 class MutantStack : public std::stack<T> {
 	public :
@@ -40,6 +40,6 @@ class MutantStack : public std::stack<T> {
 		};
 
 		iterator	end(){
-			return (this->c.begin());
+			return (this->c.end());
 		};
 };
