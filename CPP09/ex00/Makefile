@@ -6,17 +6,17 @@
 #    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 15:55:45 by victorviter       #+#    #+#              #
-#    Updated: 2025/08/16 17:05:52 by victorviter      ###   ########.fr        #
+#    Updated: 2025/08/18 15:41:06 by victorviter      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Span
+NAME = btc
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 
 INCLUDE = -I./include/
 
-SRCS_MAIN_F =	main.cpp Span.cpp
+SRCS_MAIN_F =	main.cpp btc.cpp 
 
 SRCS = $(addprefix srcs/, $(SRCS_MAIN_F))
 
