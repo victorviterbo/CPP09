@@ -6,9 +6,11 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:54:21 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/16 17:54:43 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/16 18:04:41 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+class Span;
 
 template <typename Iter>
 void	Span::addNumber(Iter begin, Iter end)
