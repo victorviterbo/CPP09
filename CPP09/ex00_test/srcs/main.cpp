@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FordJohnson.hpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 13:02:59 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/19 15:58:44 by vviterbo         ###   ########.fr       */
+/*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
+/*   Updated: 2025/08/19 14:51:12 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "btc.hpp"
 
-#include <vector>
-#include <list>
-#include <cmath>
-#include <iostream>
-#include <algorithm>
-#include <deque>
+int main(int argc, char *argv[])
+{
+	std::vector<daytrade>	data;
 
-typedef struct s_intpair {
-	int		big;
-	int		small;
-}	intpair;
-
-void	initial_split(std::deque<int> &vals, std::list<intpair> &main);
-void	generate_Jacobsthal(int n, std::deque<int> &q);
+	if (argc != 2)
+	{
+		std::cout << "ERROR : wrong number of arguments. Exiting ..." << std::endl;
+		return (1);
+	}
+	try {
+		data = load_db();
+	}
+	catch (std::runtime_error &e){
+		std::cout << e.what() << std::endl;
+	}
+	input_processing(argv[1], data);
+	return (0);
+}

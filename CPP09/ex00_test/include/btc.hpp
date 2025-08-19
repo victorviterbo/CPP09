@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FordJohnson.hpp                                    :+:      :+:    :+:   */
+/*   btc.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 13:02:59 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/19 15:58:44 by vviterbo         ###   ########.fr       */
+/*   Created: 2025/08/18 15:38:59 by victorviter       #+#    #+#             */
+/*   Updated: 2025/08/19 14:51:47 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <vector>
 #include <list>
-#include <cmath>
 #include <iostream>
-#include <algorithm>
-#include <deque>
+#include <fstream>
+#include <climits>
+#include <string>
+#include <iterator>
+#include <cstdlib>
+#include <vector>
 
-typedef struct s_intpair {
-	int		big;
-	int		small;
-}	intpair;
+typedef struct d_daytrade {
+        std::string     date;
+        float           value;
+}   daytrade;
 
-void	initial_split(std::deque<int> &vals, std::list<intpair> &main);
-void	generate_Jacobsthal(int n, std::deque<int> &q);
+std::vector<daytrade>	load_db();
+int	input_processing(char *input, std::vector<daytrade> data);
+int	process_line(std::string line, std::vector<daytrade> data);
+int	check_date(std::string date);
+int	check_null_value(std::string value);

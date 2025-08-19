@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/19 13:04:50 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:02:08 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 int main(int argc, char *argv[])
 {
-	std::vector<int>	vals;
-	std::list<int>		main;
+	std::deque<int>		vals;
+	std::list<intpair>	main;
 	int					newval;
+	std::deque<int>		jacobsthal;
 
 	while (argc - 1)
 	{
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
 		}
 		vals.push_back(newval);
 	}
+	generate_Jacobsthal(vals.size(), jacobsthal);
 	initial_split(vals, main);
 	
 }
