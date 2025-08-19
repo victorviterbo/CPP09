@@ -5,28 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/19 13:33:23 by vviterbo         ###   ########.fr       */
+/*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
+/*   Updated: 2025/08/19 13:04:50 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btc.hpp"
+#include "parsing.hpp"
+#include "FordJohnson.hpp"
 
 int main(int argc, char *argv[])
 {
-	std::list<daytrade>	data;
+	std::vector<int>	vals;
+	std::list<int>		main;
+	int					newval;
 
-	if (argc != 2)
+	while (argc - 1)
 	{
-		std::cout << "ERROR : wrong number of arguments. Exiting ..." << std::endl;
-		return (1);
+		newval = atoi(argv[argc - 1]);
+		if (!newval && is_non_zero(argv[argc - 1]))
+		{
+			std::cout << "Error: parsing of input failed on " << argv[argc - 1] << std::endl;
+			return (1);
+		}
+		if (std::find(vals.begin(), vals.end(), newval)  != vals.end())
+		{
+			std::cout << "Error: value appears more than once in the input" << argv[argc - 1] << std::endl;
+			return (1);
+		}
+		vals.push_back(newval);
 	}
-	try {
-		data = load_db();
-	}
-	catch (std::runtime_error &e){
-		std::cout << e.what() << std::endl;
-	}
-	input_processing(argv[1], data);
-	return (0);
+	initial_split(vals, main);
+	
 }

@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FordJohnson.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/19 13:33:23 by vviterbo         ###   ########.fr       */
+/*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
+/*   Updated: 2025/08/19 13:07:13 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btc.hpp"
+#include "FordJohnson.hpp"
 
-int main(int argc, char *argv[])
+void	initial_split(std::vector<int> &vals, std::list<int> &main)
 {
-	std::list<daytrade>	data;
-
-	if (argc != 2)
+	for (unsigned int i = 0; i + 1 < vals.size(); i += 2)
 	{
-		std::cout << "ERROR : wrong number of arguments. Exiting ..." << std::endl;
-		return (1);
+		if (vals[i])
 	}
-	try {
-		data = load_db();
-	}
-	catch (std::runtime_error &e){
-		std::cout << e.what() << std::endl;
-	}
-	input_processing(argv[1], data);
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   btc.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/18 17:54:31 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/19 13:59:00 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ std::list<daytrade>	load_db()
 	std::list<daytrade>	data;
 	daytrade			dt;
 	std::ifstream 		db;
+	const char			*valstr;
+	char				*endPtr;
 
 	db.open("data.csv", std::ios::in);
 	if(!db)
@@ -33,7 +35,12 @@ std::list<daytrade>	load_db()
 		if (!check_date(line.substr(0, 10)))	
 			throw std::runtime_error("DB is not properly formated");
 		dt.date = line.substr(0, 10);
-		dt.value = stof(line.substr(11, line.length()));
+		valstr = line.substr(11, line.length()).c_str();
+		dt.value = std::strtof(valstr, &endPtr);
+		if (valstr == endPtr)
+		{
+			throw std::runtime_error("Could not parse db");
+		}
 		data.push_back(dt);
 	}
 	return (data);
@@ -65,6 +72,8 @@ int	process_line(std::string line, std::list<daytrade> data)
 {
 	std::string			date;
 	float				value;
+	const char			*valstr;
+	char				*endPtr;
 
 	if (line.length() < 14)
 	{
@@ -78,11 +87,20 @@ int	process_line(std::string line, std::list<daytrade> data)
 		return (1);
 	}
 	std::list<daytrade>::iterator it = data.begin();
-	while (next(it) != data.end())
+	std::list<daytrade>::iterator nextIt = data.begin();
+	nextIt++;
+	while (it != data.end())
 	{
-		if (date.compare((*next(it)).date) < 0)
+		if ((nextIt != data.end() && date.compare((*nextIt).date) < 0)
+			|| (nextIt == data.end() &&  date.compare((*it).date) == 0))
 		{
-			value = stof(line.substr(13, line.length()));
+			valstr = line.substr(13, line.length()).c_str();
+			value = std::strtof(valstr, &endPtr);
+			if (endPtr == valstr)
+			{
+				std::cout << "Error: value could not be parsed." << std::endl;
+				return (1);
+			}
 			if (value < 0)
 			{
 				std::cout << "Error: not a positive number." << std::endl;
@@ -93,15 +111,11 @@ int	process_line(std::string line, std::list<daytrade> data)
 				std::cout << "Error: too large a number." << std::endl;
 				return (1);
 			}
-			if (value == 0 && check_null_value(line.substr(13, line.length())))
-			{
-				std::cout << "Error: value could not be parsed." << std::endl;
-				return (1);
-			}
 			std::cout << date << " => " << value << " = " << value * (*it).value << std::endl;
 			return (0);
 		}
 		++it;
+		++nextIt;
 	}
 	std::cout << "Error: date is in the future." << std::endl;
 	return (1);

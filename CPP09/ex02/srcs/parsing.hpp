@@ -1,32 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   parsing.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/19 13:33:23 by vviterbo         ###   ########.fr       */
+/*   Created: 2025/08/19 12:35:51 by vviterbo          #+#    #+#             */
+/*   Updated: 2025/08/19 12:36:15 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btc.hpp"
+#pragma once
 
-int main(int argc, char *argv[])
-{
-	std::list<daytrade>	data;
+#include <string>
 
-	if (argc != 2)
-	{
-		std::cout << "ERROR : wrong number of arguments. Exiting ..." << std::endl;
-		return (1);
-	}
-	try {
-		data = load_db();
-	}
-	catch (std::runtime_error &e){
-		std::cout << e.what() << std::endl;
-	}
-	input_processing(argv[1], data);
-	return (0);
-}
+bool	is_non_zero(std::string s);

@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 17:55:58 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/19 11:46:17 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/08/19 11:50:55 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int main(int argc, char *argv[])
 			continue ;
 		else if (isdigit(arg[i]))
 		{
-			if 
+			if (arg[i + 1] && isdigit(arg[i + 1]))
+			{
+				std::cout << "Error: number larger than 9" << std::endl;
+				return (1);
+			}
 			nums.push(static_cast<float>(arg[i] - '0'));
 		}
 		else if (arg[i] == '+' || arg[i] == '-' || arg[i] == '*' || arg[i] == '/')

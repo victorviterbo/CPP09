@@ -68,6 +68,7 @@
         "numbers": "cpp",
         "ostream": "cpp",
         "ranges": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "forward_list": "cpp"
     }
 }

@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
+#    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 15:55:45 by victorviter       #+#    #+#              #
-#    Updated: 2025/08/16 14:17:01 by victorviter      ###   ########.fr        #
+#    Updated: 2025/08/19 12:28:16 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = EasyFind
+NAME = PmergeMe
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 
