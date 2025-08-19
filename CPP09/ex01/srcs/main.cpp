@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 17:55:58 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/18 18:35:09 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/19 11:46:17 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int main(int argc, char *argv[])
 		if (std::isspace(arg[i]))
 			continue ;
 		else if (isdigit(arg[i]))
+		{
+			if 
 			nums.push(static_cast<float>(arg[i] - '0'));
+		}
 		else if (arg[i] == '+' || arg[i] == '-' || arg[i] == '*' || arg[i] == '/')
 		{
 			if (nums.size() < 2)
@@ -59,6 +62,11 @@ int main(int argc, char *argv[])
 					nums.push(val2 / val1);
 					break ;
 			}
+		}
+		else
+		{
+			std::cout << "Error: unexpected token " << arg[i] << std::endl;
+			return (1);
 		}
 	}
 	if (nums.size() != 1)
