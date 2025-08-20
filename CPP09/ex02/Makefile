@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
+#    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 15:55:45 by victorviter       #+#    #+#              #
-#    Updated: 2025/08/19 12:28:16 by vviterbo         ###   ########.fr        #
+#    Updated: 2025/08/20 16:22:16 by victorviter      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = c++
 
 INCLUDE = -I./include/
 
-SRCS_MAIN_F =	main.cpp
+SRCS_MAIN_F =	main.cpp FordJohnson.cpp parsing.cpp
 
 SRCS = $(addprefix srcs/, $(SRCS_MAIN_F))
 
