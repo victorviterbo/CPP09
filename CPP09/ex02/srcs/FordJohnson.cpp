@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/20 16:42:35 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/20 17:11:24 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,16 @@ std::deque<int>	recursive_merge_insert(std::list<intpair> unsorted)
 		it = ++nextIt;
 		++nextIt;
 	}
+	std::cout << "----- SORTED -------" << std::endl;
+	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+		std::cout << (*it).small << ", " << (*it).big << std::endl;
+	std::cout << std::endl;
 	main = recursive_merge_insert(sorted);
 	std::cout << "Back from recursion for size " << unsorted.size() << std::endl;
+	std::cout << "----- MAIN -------" << std::endl;
+	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << std::endl;
 	merge_into_main(main, sorted, pairing);
 	return (main);
 }
@@ -106,33 +114,46 @@ int	find_pair(int n, std::list<intpair> sorted)
 
 void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<int, std::list<intpair>::iterator>	pairing)
 {
-	int	last_jacob;
-	int	jacob;
-	int	tmp;
+	size_t	last_jacob;
+	size_t	jacob;
+	size_t	tmp;
 	
-	std::deque<int>::iterator	it = main.begin();
 	std::cout << " entering merge_into_main" << std::endl;
-	main.push_back((*pairing[main.front()]).small);
-	sorted.erase(pairing[main.front()]);
 	last_jacob = 0;
 	jacob = 1;
-	while (sorted.size())
+	std::cout << "BEFORE" << std::endl;
+	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << "main over" << std::endl;
+
+	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+		std::cout << (*it).small << "\n";
+	std::cout << std::endl;
+
+	while (jacob < sorted.size())
 	{
+		std::cout << "coucou ! jacob = " << jacob << std::endl;
+		for (size_t i = jacob; i > last_jacob; i--)
+			insert_into_main((*pairing[main[i - 1]]).small, main, i, jacob);
 		tmp = jacob;
 		jacob = jacob + 2 * last_jacob;
 		last_jacob = tmp;
-		for (unsigned int i = jacob; i > 0; i--)
-		{
-			it = main.begin();
-			std::advance(it, i);
-			insert_into_main((*pairing[main[i + 1]]).small, main, i, jacob);
-		}
 	}
+	std::cout << "AFTER" << std::endl;
+	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << std::endl;
+
+	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+		std::cout << (*it).small << "\n";
+	std::cout << std::endl;
 }
 
 void	insert_into_main(int n,  std::deque<int> main, int i, int jacob)
 {
 	int	range_to_check = (jacob - 1) / 2;
+		
+	std::cout << "range_to_check = " << range_to_check << "i = " << i << std::endl;
 
 	while (range_to_check)
 	{
@@ -140,7 +161,7 @@ void	insert_into_main(int n,  std::deque<int> main, int i, int jacob)
 			i += range_to_check;
 		else if (n < main[i])
 			i -= range_to_check;
-		range_to_check /= 2;
+		range_to_check = std::ceil(range_to_check / 2);
 	}
 	std::deque<int>::iterator	it = main.begin();
 	std::advance(it, i + 1);
