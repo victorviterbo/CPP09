@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/20 17:11:24 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/20 17:27:09 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,12 @@ void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<
 	size_t	jacob;
 	size_t	tmp;
 	
+	if (sorted.size() == 1)
+	{
+		main.push_front(sorted.front().small);
+		return ;
+	}
 	std::cout << " entering merge_into_main" << std::endl;
-	last_jacob = 0;
-	jacob = 1;
 	std::cout << "BEFORE" << std::endl;
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
 		std::cout << *it << "\n";
@@ -129,15 +132,16 @@ void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<
 	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
 		std::cout << (*it).small << "\n";
 	std::cout << std::endl;
-
-	while (jacob < sorted.size())
+	last_jacob = 1;
+	jacob = 1;
+	while (last_jacob < sorted.size())
 	{
-		std::cout << "coucou ! jacob = " << jacob << std::endl;
-		for (size_t i = jacob; i > last_jacob; i--)
-			insert_into_main((*pairing[main[i - 1]]).small, main, i, jacob);
 		tmp = jacob;
 		jacob = jacob + 2 * last_jacob;
 		last_jacob = tmp;
+		std::cout << "coucou ! jacob = " << jacob << std::endl;
+		for (size_t i = jacob; i > last_jacob; --i)
+			insert_into_main((*pairing[main[i - 1]]).small, main, i, jacob);
 	}
 	std::cout << "AFTER" << std::endl;
 	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
@@ -149,11 +153,11 @@ void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<
 	std::cout << std::endl;
 }
 
-void	insert_into_main(int n,  std::deque<int> main, int i, int jacob)
+void	insert_into_main(int n,  std::deque<int> &main, int i, int jacob)
 {
-	int	range_to_check = (jacob - 1) / 2;
+	int	range_to_check = (jacob + 1) / 2;
 		
-	std::cout << "range_to_check = " << range_to_check << "i = " << i << std::endl;
+	std::cout << "range_to_check = " << range_to_check << " i = " << i << std::endl;
 
 	while (range_to_check)
 	{
@@ -164,6 +168,10 @@ void	insert_into_main(int n,  std::deque<int> main, int i, int jacob)
 		range_to_check = std::ceil(range_to_check / 2);
 	}
 	std::deque<int>::iterator	it = main.begin();
-	std::advance(it, i + 1);
+	std::advance(it, i);
+
+	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << "trying to insert " << n << " at pos " << i << std::endl;
 	main.insert(it, n);
 }
