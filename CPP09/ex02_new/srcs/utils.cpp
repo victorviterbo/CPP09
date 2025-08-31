@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/31 11:34:11 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/31 17:01:12 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ bool	isNonZero(std::string s)
 	return (false);
 }
 
-std::deque<int>	getInsertionOrder(int listSize)
+std::deque<size_t>	getInsertionOrder(int listSize)
 {
-	int				J1 = 1;
-	int 			J2 = 3;
-	int				tmp;
-	std::deque<int>	indexOrder;	
+	int					J1 = 1;
+	int 				J2 = 3;
+	int					tmp;
+	std::deque<size_t>	indexOrder;	
 
 	while (J2 < listSize)
 	{
@@ -80,9 +80,16 @@ void	printDeque(std::deque<int> d)
 	std::cout << std::endl;
 }
 
+void	printDeque(std::deque<size_t> d)
+{
+	for (std::deque<size_t>::iterator it = d.begin(); it != d.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << std::endl;
+}
+
 void	printPairing(std::map<int, int> pairing)
 {
 	for (std::map<int, int>::iterator it = pairing.begin(); it != pairing.end(); ++it)
-		std::cout << "first = " << it->first << "big = " << it->second << "small = " << it->second << "\n";
+		std::cout << "big = " << it->first << ", small = " << it->second << "\n";
 	std::cout << std::endl;
 }
