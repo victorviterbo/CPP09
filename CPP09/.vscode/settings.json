@@ -70,6 +70,7 @@
         "ranges": "cpp",
         "span": "cpp",
         "forward_list": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__tree": "cpp"
     }
 }

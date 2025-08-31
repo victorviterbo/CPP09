@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/20 17:27:09 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/30 18:45:44 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,11 @@ std::deque<int>	recursive_merge_insert(std::list<intpair> unsorted)
 		++nextIt;
 	}
 	std::cout << "----- SORTED -------" << std::endl;
-	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
-		std::cout << (*it).small << ", " << (*it).big << std::endl;
-	std::cout << std::endl;
+	print_list(sorted);
+	print_deque(main);
 	main = recursive_merge_insert(sorted);
 	std::cout << "Back from recursion for size " << unsorted.size() << std::endl;
 	std::cout << "----- MAIN -------" << std::endl;
-	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
-		std::cout << *it << "\n";
-	std::cout << std::endl;
 	merge_into_main(main, sorted, pairing);
 	return (main);
 }
@@ -118,20 +114,19 @@ void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<
 	size_t	jacob;
 	size_t	tmp;
 	
+	std::cout << "---------- SUMMARY -------------" << std::endl;
+	print_deque(main);
+	print_list(sorted);
+	print_pairing(pairing);
 	if (sorted.size() == 1)
 	{
-		main.push_front(sorted.front().small);
+		main.push_back(sorted.front().small);
 		return ;
 	}
 	std::cout << " entering merge_into_main" << std::endl;
 	std::cout << "BEFORE" << std::endl;
-	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
-		std::cout << *it << "\n";
-	std::cout << "main over" << std::endl;
-
-	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
-		std::cout << (*it).small << "\n";
-	std::cout << std::endl;
+	print_deque(main);
+	print_list(sorted);
 	last_jacob = 1;
 	jacob = 1;
 	while (last_jacob < sorted.size())
@@ -139,17 +134,17 @@ void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<
 		tmp = jacob;
 		jacob = jacob + 2 * last_jacob;
 		last_jacob = tmp;
-		std::cout << "coucou ! jacob = " << jacob << std::endl;
-		for (size_t i = jacob; i > last_jacob; --i)
-			insert_into_main((*pairing[main[i - 1]]).small, main, i, jacob);
+		std::cout << "in loop" << std::endl;
+		std::cout << "pairing = " << (*pairing[main[jacob - 1 - (sorted.size() % 2 == 0)]]).small << std::endl;
+		std::cout << "coucou ! jacob = " << jacob << ", last jacob = " << last_jacob << std::endl;
+		print_deque(main);
+		std::cout << std::endl;
+		for (size_t i = jacob - 1; i > last_jacob - 1; --i)
+			insert_into_main((*pairing[main[i - (sorted.size() % 2 == 0)]]).small, main, i, jacob);
 	}
 	std::cout << "AFTER" << std::endl;
-	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
-		std::cout << *it << "\n";
-	std::cout << std::endl;
-
-	for (std::list<intpair>::iterator it = sorted.begin(); it != sorted.end(); ++it)
-		std::cout << (*it).small << "\n";
+	print_deque(main);
+	print_list(sorted);
 	std::cout << std::endl;
 }
 
@@ -158,20 +153,20 @@ void	insert_into_main(int n,  std::deque<int> &main, int i, int jacob)
 	int	range_to_check = (jacob + 1) / 2;
 		
 	std::cout << "range_to_check = " << range_to_check << " i = " << i << std::endl;
-
+	std::cout << "inserting n = " << n << std::endl;
 	while (range_to_check)
 	{
+		range_to_check = std::ceil(range_to_check / 2);
 		if (n > main[i])
 			i += range_to_check;
 		else if (n < main[i])
 			i -= range_to_check;
-		range_to_check = std::ceil(range_to_check / 2);
 	}
 	std::deque<int>::iterator	it = main.begin();
 	std::advance(it, i);
 
-	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
-		std::cout << *it << "\n";
+	for (std::deque<int>::iterator it1 = main.begin(); it1 != main.end(); ++it1)
+		std::cout << *it1 << "\n";
 	std::cout << "trying to insert " << n << " at pos " << i << std::endl;
 	main.insert(it, n);
 }

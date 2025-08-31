@@ -6,24 +6,13 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:59 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/20 17:18:53 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/30 18:27:08 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <vector>
-#include <list>
-#include <cmath>
-#include <iostream>
-#include <algorithm>
-#include <deque>
-#include <map>
-
-typedef struct s_intpair {
-	int		big;
-	int		small;
-}	intpair;
+#include "utils.hpp"
 
 void			initial_split(std::deque<int> &vals, std::list<intpair> &main);
 void			generate_Jacobsthal(int n, std::deque<int> &q);

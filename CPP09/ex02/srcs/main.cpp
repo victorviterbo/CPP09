@@ -6,17 +6,16 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/20 16:54:16 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/31 10:56:50 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.hpp"
+#include "utils.hpp"
 #include "FordJohnson.hpp"
 
 int main(int argc, char *argv[])
 {
 	std::deque<int>		vals;
-	std::list<intpair>	initial;
 	int					newval;
 	std::deque<int>		jacobsthal;
 
@@ -35,15 +34,11 @@ int main(int argc, char *argv[])
 		}
 		vals.push_back(newval);
 	}
-	for (std::deque<int>::iterator it = vals.begin(); it != vals.end(); ++it)
-		std::cout << "num = " << *it << std::endl;
 	std::cout << "\n" << std::endl;
 	generate_Jacobsthal(vals.size(), jacobsthal);
 	initial_split(vals, initial);
 
-	for (std::list<intpair>::iterator it = initial.begin(); it != initial.end(); ++it)
-		std::cout << (*it).small << ", " << (*it).big << std::endl;
-	std::cout << std::endl;
+	
 	vals = recursive_merge_insert(initial);
 	while (vals.size())
 	{
