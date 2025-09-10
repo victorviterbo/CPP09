@@ -6,13 +6,35 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/30 18:39:21 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/31 20:20:57 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.hpp"
 
-bool	is_non_zero(std::string s)
+bool	parseInput(std::deque<int> &vals, int argc, char *argv[])
+{
+	int	newval;
+
+	for (int i = 1; i < argc; i++)
+	{
+		newval = atoi(argv[i]);
+		if (!newval && isNonZero(argv[i]))
+		{
+			std::cout << "Error: parsing of input failed on " << argv[i] << std::endl;
+			return (false);
+		}
+		if (std::find(vals.begin(), vals.end(), newval) != vals.end())
+		{
+			std::cout << "Error: value appears more than once in the input " << newval << std::endl;
+			return (false);
+		}
+		vals.push_back(newval);
+	}
+	return (true);
+}
+
+bool	isNonZero(std::string s)
 {
 	if (s[0] != '0' && s[0] != '-')
 		return (true);
@@ -24,30 +46,50 @@ bool	is_non_zero(std::string s)
 	return (false);
 }
 
-void	print_list(std::list<intpair> l)
+std::deque<size_t>	getInsertionOrder(int listSize)
 {
-	for (std::list<intpair>::iterator it = l.begin(); it != l.end(); ++it)
-		std::cout << (*it).small << ", " << (*it).big << std::endl;
-	std::cout << std::endl;
+	int					J1 = 1;
+	int 				J2 = 3;
+	int					tmp;
+	std::deque<size_t>	indexOrder;	
+
+	while (J2 < listSize)
+	{
+		for (int i = J2; i > J1; --i)
+			indexOrder.push_back(i);
+		tmp = J2;
+		J2 = J2 + 2 * J1;
+		J1 = tmp;
+	}
+	for (int i = listSize; i > J1; --i)
+		indexOrder.push_back(i);
+	return (indexOrder);
 }
 
-void	print_list(std::list<int> l)
+void	printList(std::list<int> l)
 {
 	for (std::list<int>::iterator it = l.begin(); it != l.end(); ++it)
 		std::cout << (*it) << std::endl;
 	std::cout << std::endl;
 }
 
-void	print_deque(std::deque<int> d)
+void	printDeque(std::deque<int> d)
 {
 	for (std::deque<int>::iterator it = d.begin(); it != d.end(); ++it)
 		std::cout << *it << "\n";
 	std::cout << std::endl;
 }
 
-void	print_pairing(std::map<int, std::list<intpair>::iterator> pairing)
+void	printDeque(std::deque<size_t> d)
 {
-	for (std::map<int, std::list<intpair>::iterator>::iterator it = pairing.begin(); it != pairing.end(); ++it)
-		std::cout << "first = " << it->first << "big = " << (*it->second).big << "small = " << (*it->second).small << "\n";
+	for (std::deque<size_t>::iterator it = d.begin(); it != d.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << std::endl;
+}
+
+void	printPairing(std::map<int, int> pairing)
+{
+	for (std::map<int, int>::iterator it = pairing.begin(); it != pairing.end(); ++it)
+		std::cout << "big = " << it->first << ", small = " << it->second << "\n";
 	std::cout << std::endl;
 }

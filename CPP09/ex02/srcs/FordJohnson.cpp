@@ -6,167 +6,84 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/30 18:45:44 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/31 20:21:09 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FordJohnson.hpp"
 
-void	initial_split(std::deque<int> &vals, std::list<intpair> &initial)
+std::deque<int>	recursiveMergeInsert(std::deque<int> mixed)
 {
-	int		val1;
-	int		val2;
-	intpair	pair;
+	std::deque<int>		main;
+	std::deque<int>		highVals;
+	std::map<int, int>	predecessors;
+	size_t				i = 0;
 
-	while (vals.size())
+	while (i < mixed.size())
 	{
-		val1 = vals.front();
-		vals.pop_front();
-		if (vals.empty())
+		if (i + 1 == mixed.size())
+			predecessors[-1] = mixed[i];
+		else if (mixed[i] > mixed[i + 1])
 		{
-			pair.big = -1;
-			pair.small = val1;
-			initial.push_back(pair);
-			return ;
+			highVals.push_back(mixed[i]);
+			predecessors[mixed[i]] = mixed[i + 1];
 		}
-		val2 = vals.front();
-		vals.pop_front();
-		pair.big = (val1 > val2 ? val1 : val2);
-		pair.small = (val1 < val2 ? val1 : val2);
-		initial.push_back(pair);
+		else
+		{
+			highVals.push_back(mixed[i + 1]);
+			predecessors[mixed[i + 1]] = mixed[i];
+		}
+		i += 2;
 	}
-	return ;
-}
-
-void	generate_Jacobsthal(int n, std::deque<int> &q)
-{
-	q.push_front(0);
-	q.push_front(1);
-	while (q.front() < n)
-		q.push_front(q[0] + 2 * q[1]);
-}
-
-int	getJacobsthal(int n)
-{
-	int val1 = 0;
-	int val2 = 1;
-	int	tmp;
-	
-	while (val2 < n)
+	if (highVals.size() > 2)
+		main = recursiveMergeInsert(highVals);
+	else if (highVals.size() > 1)
 	{
-		tmp = val1;
-		val1 = val2;
-		val2 = val1 + 2 * tmp;
+		main.push_back(highVals[0] < highVals[1] ? highVals[0] : highVals[1]);
+		main.push_back(highVals[0] < highVals[1] ? highVals[1] : highVals[0]);
 	}
-	return (val2 - val1);
-}
-
-std::deque<int>	recursive_merge_insert(std::list<intpair> unsorted)
-{
-	std::map<int, std::list<intpair>::iterator>	pairing;
-	std::list<intpair>							sorted;
-	std::deque<int>								main;
-
-	std::cout << "Entering recursion for size " << unsorted.size() << std::endl;
-	if (unsorted.size() <= 1)
-	{
-		main.push_back(unsorted.front().big);
-		return (main);
-	}
-	intpair							pair;
-	std::list<intpair>::iterator	it = unsorted.begin();
-	std::list<intpair>::iterator	nextIt = unsorted.begin();
-	++nextIt;
-	while (nextIt != unsorted.end() && it != unsorted.end())
-	{
-		pair.big = ((*it).big > (*nextIt).big ? (*it).big : (*nextIt).big);
-		pair.small = ((*it).big < (*nextIt).big ? (*it).big : (*nextIt).big);
-		sorted.push_back(pair);
-		pairing[pair.big] = it;
-		it = ++nextIt;
-		++nextIt;
-	}
-	std::cout << "----- SORTED -------" << std::endl;
-	print_list(sorted);
-	print_deque(main);
-	main = recursive_merge_insert(sorted);
-	std::cout << "Back from recursion for size " << unsorted.size() << std::endl;
-	std::cout << "----- MAIN -------" << std::endl;
-	merge_into_main(main, sorted, pairing);
+	else
+		main.push_back(highVals[0]);
+	mergeInMain(main, predecessors);
 	return (main);
 }
 
-int	find_pair(int n, std::list<intpair> sorted)
+void	mergeInMain(std::deque<int> &main, std::map<int, int> predecessors)
 {
-	std::list<intpair>::iterator	it = sorted.begin();
-	while (it != sorted.end())
+	std::deque<int>	reorderedLowVals;
+
+	for (std::deque<int>::iterator it = main.begin(); it != main.end(); ++it)
+		reorderedLowVals.push_back(predecessors[*it]);
+	if (predecessors.find(-1) != predecessors.end())
+		reorderedLowVals.push_back(predecessors[-1]);
+	main.push_front(predecessors[main[0]]);
+	for (size_t i = 0; i < std::min(2 * reorderedLowVals.size(), insertionOrder.size()); ++i)
 	{
-		if ((*it).big == n)
-			return ((*it).small);
-		++it;
+		if (insertionOrder[i] > reorderedLowVals.size())
+			continue ;
+		insertIntoMain(main, reorderedLowVals[insertionOrder[i] - 1], insertionOrder[i] + i);
 	}
-	throw std::runtime_error("Error: could not find pendant");
 }
 
-void	merge_into_main(std::deque<int> &main, std::list<intpair> sorted, std::map<int, std::list<intpair>::iterator>	pairing)
+void	insertIntoMain(std::deque<int> &main, int n, int indx)
 {
-	size_t	last_jacob;
-	size_t	jacob;
-	size_t	tmp;
-	
-	std::cout << "---------- SUMMARY -------------" << std::endl;
-	print_deque(main);
-	print_list(sorted);
-	print_pairing(pairing);
-	if (sorted.size() == 1)
-	{
-		main.push_back(sorted.front().small);
-		return ;
-	}
-	std::cout << " entering merge_into_main" << std::endl;
-	std::cout << "BEFORE" << std::endl;
-	print_deque(main);
-	print_list(sorted);
-	last_jacob = 1;
-	jacob = 1;
-	while (last_jacob < sorted.size())
-	{
-		tmp = jacob;
-		jacob = jacob + 2 * last_jacob;
-		last_jacob = tmp;
-		std::cout << "in loop" << std::endl;
-		std::cout << "pairing = " << (*pairing[main[jacob - 1 - (sorted.size() % 2 == 0)]]).small << std::endl;
-		std::cout << "coucou ! jacob = " << jacob << ", last jacob = " << last_jacob << std::endl;
-		print_deque(main);
-		std::cout << std::endl;
-		for (size_t i = jacob - 1; i > last_jacob - 1; --i)
-			insert_into_main((*pairing[main[i - (sorted.size() % 2 == 0)]]).small, main, i, jacob);
-	}
-	std::cout << "AFTER" << std::endl;
-	print_deque(main);
-	print_list(sorted);
-	std::cout << std::endl;
-}
-
-void	insert_into_main(int n,  std::deque<int> &main, int i, int jacob)
-{
-	int	range_to_check = (jacob + 1) / 2;
-		
-	std::cout << "range_to_check = " << range_to_check << " i = " << i << std::endl;
-	std::cout << "inserting n = " << n << std::endl;
-	while (range_to_check)
-	{
-		range_to_check = std::ceil(range_to_check / 2);
-		if (n > main[i])
-			i += range_to_check;
-		else if (n < main[i])
-			i -= range_to_check;
-	}
+	int							range;
 	std::deque<int>::iterator	it = main.begin();
-	std::advance(it, i);
 
-	for (std::deque<int>::iterator it1 = main.begin(); it1 != main.end(); ++it1)
-		std::cout << *it1 << "\n";
-	std::cout << "trying to insert " << n << " at pos " << i << std::endl;
+	range = std::min((indx + 1) / 2, static_cast<int>(main.size() - 1));
+	indx = indx / 2;
+	while (range)
+	{
+		range = range / 2;
+		if (main[indx] < n)
+			indx += range;
+		else
+			indx -= range;
+	}
+	if (main[indx] < n)
+		std::advance(it, indx + 1);
+	else
+		std::advance(it, indx);
 	main.insert(it, n);
+	return ;
 }

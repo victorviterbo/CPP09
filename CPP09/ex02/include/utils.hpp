@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:35:51 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/30 18:39:23 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/08/31 20:22:07 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@
 #include <deque>
 #include <map>
 
-typedef struct s_intpair {
-	int		big;
-	int		small;
-}	intpair;
+extern std::deque<size_t> insertionOrder; 
 
-bool	is_non_zero(std::string s);
-void	print_list(std::list<intpair> l);
-void	print_list(std::list<int> l);
-void	print_deque(std::deque<int> d);
-void	print_pairing(std::map<int, std::list<intpair>::iterator> pairing);
+bool				parseInput(std::deque<int> &vals, int argc, char *argv[]);
+std::deque<size_t>	getInsertionOrder(int listSize);
+bool				isNonZero(std::string s);
+void				printList(std::list<int> l);
+void				printDeque(std::deque<int> d);
+void				printDeque(std::deque<size_t> d);
+void				printPairing(std::map<int, int> pairing);
