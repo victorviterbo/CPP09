@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:46 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/14 16:36:03 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 16:09:17 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ScalarConverter::convertNumber(std::string s)
 		c = static_cast<char>(d);
 		if (std::isprint(c))
 			std::cout << "char: " << c << std::endl;
-		else 
+		else
 			std::cout << "char: Non displayable" << std::endl;
 	}
 	double intPart;

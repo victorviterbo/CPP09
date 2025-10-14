@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 15:48:20 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 15:48:23 by victorviter      ###   ########.fr       */
+/*   Created: 2025/10/14 13:59:13 by victorviter       #+#    #+#             */
+/*   Updated: 2025/10/14 16:13:45 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,35 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		throw GradeTooLowException();
 
 	std::ofstream	graft;
-	std::ifstream	tree;
 	std::string		line;
 
 	graft.open(this->_target + "_shrubbery");
-	tree.open("tree.txt");
-    while (std::getline(tree, line)) {
-        graft << line << std::endl;
-    }
+	graft << this->tree_str << std::endl;
 	graft.close();
-	tree.close();
 }
+
+const std::string ShrubberyCreationForm::tree_str = "            .        +          .      .          .\n"\
+"     .            _        .                    .\n"\
+"  ,              /;-._,-.____        ,-----.__\n"\
+" ((        .    (_:#::_.:::. `-._   /:, /-._, `._,\n"\
+"  `                 \\   _|`\"=:_::.`.);  \\ __/ /\n"\
+"                      ,    `./  \\:. `.   )==-'  .\n"\
+"    .      ., ,-=-.  ,\\, +#./`   \\:.  / /           .\n"\
+".           \\/:/`-' , ,\\ '` ` `   ): , /_  -o\n"\
+"       .    /:+- - + +- : :- + + -:'  /(o-) \\)     .\n"\
+"  .      ,=':  \\    ` `/` ' , , ,:' `'--\".--\"---._/`7\n"\
+"   `.   (    \\: \\,-._` ` + '\\, ,\"   _,--._,---\":.__/\n"\
+"              \\:  `  X` _| _,\\/'   .-'\n"\
+".               \":._:`\\____  /:'  /      .           .\n"\
+"                    \\::.  :\\/:'  /              +\n"\
+"   .                 `.:.  /:'  }      .\n"\
+"           .           ):_(:;   \\           .\n"\
+"                      /:. _/ ,  |\n"\
+"                   . (|::.     ,`                  .\n"\
+"     .                |::.    {\\\n"\
+"                      |::.\\  \\ `.\n"\
+"                      |:::(\\    |\n"\
+"              O       |:::/{ }  |                  (o\n"\
+"               )  ___/#\\::`/ (O \"==._____   O, (O  /`\n"\
+"          ~~~w/w~\"~~,\\` `:/,-(~`\"~~~~~~~~\"~o~\\~/~w|/~\n"\
+"      ~~~~~~~~~~~~~~~~~~~~~~~\\\\W~~~~~~~~~~~~\\|/~~";
