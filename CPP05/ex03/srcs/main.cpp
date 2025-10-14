@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 14:58:54 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 22:05:47 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int main(void)
 {
-	Bureaucrat  A("Victor", 12);
+	Bureaucrat	A("Victor", 12);
 	Intern		sbire;
 	AForm		*forms[9];
 

@@ -6,13 +6,12 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:56 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 13:29:51 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 22:00:45 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <cstdio>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -21,6 +20,12 @@
 
 class Bureaucrat {
 	public :
+		class GradeTooLowException : public std::exception {
+			public:
+				const char* what() const _NOEXCEPT {
+					return "Grade is too low! (Must be <= 150)";
+				}
+		};
 		class GradeTooHighException : public std::exception {
 			public:
 				const char* what() const _NOEXCEPT {
@@ -28,12 +33,6 @@ class Bureaucrat {
 				}
 		};
 
-		class GradeTooLowException : public std::exception {
-			public:
-				const char* what() const _NOEXCEPT {
-					return "Grade is too low! (Must be <= 150)";
-				}
-		};
 		Bureaucrat();
 		Bureaucrat(const std::string name, int grade);
 		Bureaucrat(Bureaucrat &other);

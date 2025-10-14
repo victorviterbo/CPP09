@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:56 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 14:37:47 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 22:05:08 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ class Bureaucrat {
 		std::string const	&getName(void) const;
 		unsigned int		getGrade(void) const;
 
-		void    			signForm(AForm &form);
-		void   				executeForm(AForm const &form) const;
+		void				signForm(AForm &form) const; 
+		void				executeForm(AForm const &form) const;
 	private :
 		const std::string	_name;
 		unsigned int		_grade;

@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:47:58 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 15:48:00 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 21:37:04 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ class ShrubberyCreationForm : virtual public AForm {
 	//MEMBER FUNCTIONS
 		void execute(Bureaucrat const &executor) const;
 	private :
-		std::string		_target;
+		std::string					_target;
+		static const std::string	tree_str;
 };
