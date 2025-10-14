@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:43 by victorviter       #+#    #+#             */
-/*   Updated: 2025/07/31 21:56:27 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 13:34:43 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,22 @@
 
 Bureaucrat::Bureaucrat() {}
 
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade)
+Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
 {
     if (grade > 150)
         throw GradeTooLowException();
     else if (grade < 1)
         throw GradeTooHighException();
-    this->_name = name;
     this->_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat &other)
+Bureaucrat::Bureaucrat(Bureaucrat &other) : _name(other._name)
 {
-    this->_name = other._name;
     this->_grade = other._grade;
 }
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat &other)
 {
-    this->_name = other._name;
     this->_grade = other._grade;
     return (*this);
 }
@@ -41,16 +38,16 @@ Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat	Bureaucrat::operator++(int)
 {
-    if (this->_grade >= 150)
-        throw GradeTooLowException();
+    if (this->_grade <= 1)
+        throw GradeTooHighException();
     this->_grade -= 1;
     return (*this);
 }
 
 Bureaucrat	Bureaucrat::operator--(int)
 {
-    if (this->_grade <= 1)
-        throw GradeTooHighException();
+    if (this->_grade >= 150)
+        throw GradeTooLowException();
     this->_grade++;
     return (*this);
 }
@@ -60,7 +57,7 @@ std::string const   &Bureaucrat::getName(void) const
     return (this->_name);
 }
 
-unsigned int	Bureaucrat::getGrade(void) const
+unsigned int    	Bureaucrat::getGrade(void) const
 {
     return (this->_grade);
 }

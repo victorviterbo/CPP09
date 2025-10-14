@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/07/31 08:57:47 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 13:43:25 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int main(void)
 	Bureaucrat  A("Victor", 12);
 	Bureaucrat  B("Gratte Papier en Chef", 25);
 	
-	Form        Doc1("Very Important Document", false, 8, 2);
-	Form        Doc2("Another Important Document", false, 21, 1);
+	Form        Doc1("Very Important Document", 8, 2);
+	Form        Doc2("Another Important Document", 21, 1);
 	
 	A.signForm(Doc1);
 	A.signForm(Doc2);
@@ -27,28 +27,28 @@ int main(void)
 	B.signForm(Doc2);
 
 	try {
-		Form        Doc10("Probably rubish", false, 1000, 2);
+		Form        Doc10("Probably rubish", 1000, 2);
 	}
 	catch (const Form::GradeTooLowException &error) {
 		std::cerr << "Error: " << error.what() << std::endl;
 	}
 	
 	try {
-		Form        Doc11("Certainly rubish", false, 10, 200);
+		Form        Doc11("Certainly rubish", 10, 200);
 	}
 	catch (const Form::GradeTooLowException &error) {
 		std::cerr << "Error: " << error.what() << std::endl;
 	}
 	
 	try {
-		Form        Doc12("Looks like important rubish", false, 0, 200);
+		Form        Doc12("Looks like important rubish", 0, 200);
 	}
 	catch (const Form::GradeTooHighException &error) {
 		std::cerr << "Error: " << error.what() << std::endl;
 	}
 	
 	try {
-		Form        Doc13("To hell with it", false, 100, 0);
+		Form        Doc13("To hell with it", 100, 0);
 	}
 	
 	catch (const Form::GradeTooHighException &error) {

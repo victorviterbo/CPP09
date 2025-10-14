@@ -26,5 +26,6 @@ class ShrubberyCreationForm : virtual public AForm {
 	//MEMBER FUNCTIONS
 		void execute(Bureaucrat const &executor) const;
 	private :
-		std::string		_target;
+		std::string			_target;
+		const std::string	tree;
 };

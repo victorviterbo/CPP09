@@ -32,9 +32,9 @@ AForm &AForm::operator=(AForm &other)
 
 AForm::~AForm() {}
 
-void	AForm::beSigned(Bureaucrat &GrattePapier)
+void	AForm::beSigned(Bureaucrat &signer)
 {
-    if (GrattePapier.getGrade() > this->_sign_req)
+    if (signer.getGrade() > this->_sign_req)
         throw GradeTooLowException();
     this->_signed = true;
 }

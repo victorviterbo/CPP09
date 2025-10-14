@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 21:09:57 by victorviter       #+#    #+#             */
-/*   Updated: 2025/07/30 22:01:33 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 13:41:40 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ class Form {
 		};
 		
 		Form();
-		Form(std::string name, bool is_signed, unsigned int sign_grade, unsigned int execute_grade);
+		Form(std::string name, unsigned int sign_grade, unsigned int execute_grade);
 		Form(Form &other);
 		Form &operator=(Form &other);
 		~Form();
 
-		void				beSigned(Bureaucrat &GrattePapier);
+		void				beSigned(Bureaucrat &signer);
 		
 		std::string const	&getName(void) const;
 		bool				getSignedStatus(void) const;
 		unsigned int		getSignRequirement(void) const;
 		unsigned int		getExecuteRequirement(void) const;
 	private :
-		std::string const	_name;
+		const std::string	_name;
 		bool				_signed;
-		unsigned int		_sign_req;
-		unsigned int		_execute_req;
+		const unsigned int	_sign_req;
+		const unsigned int	_execute_req;
 };
 
 std::ostream &operator<<(std::ostream &os, const Form &operand);

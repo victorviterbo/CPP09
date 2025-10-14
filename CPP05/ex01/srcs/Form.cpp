@@ -2,39 +2,43 @@
 
 #include "Form.hpp"
 
-Form::Form() : _name("Form : Idable"){}
+Form::Form()
+    :   _name("unknown form"),
+        _sign_req(1),
+        _execute_req(1)
+{}
 
-Form::Form(std::string name, bool is_signed, unsigned int sign_grade, unsigned int execute_grade) : _name(name)
+Form::Form(const std::string name, unsigned int sign_grade, unsigned int execute_grade)
+    :   _name(name),
+        _sign_req(sign_grade),
+        _execute_req(execute_grade)
 {
     if (sign_grade < 1 || execute_grade < 1)
         throw GradeTooHighException();
     else if (sign_grade > 150 || execute_grade > 150)
         throw GradeTooLowException();
-    this->_signed = is_signed;
-    this->_sign_req = sign_grade;
-    this->_execute_req = execute_grade;
+    this->_signed = false;
 }
 
-Form::Form(Form &other) : _name(other._name)
+Form::Form(Form &other)
+    :   _name(other._name),
+        _sign_req(other._sign_req),
+        _execute_req(other._execute_req)
 {
     this->_signed = other._signed;
-    this->_sign_req = other._sign_req;
-    this->_execute_req = other._execute_req;
 }
 
 Form &Form::operator=(Form &other)
 {
     this->_signed = other._signed;
-    this->_sign_req = other._sign_req;
-    this->_execute_req = other._execute_req;
     return (*this);
 }
 
 Form::~Form() {}
 
-void	Form::beSigned(Bureaucrat &GrattePapier)
+void	Form::beSigned(Bureaucrat &signer)
 {
-    if (GrattePapier.getGrade() > this->_sign_req)
+    if (signer.getGrade() > this->_sign_req)
         throw GradeTooLowException();
     this->_signed = true;
 }
