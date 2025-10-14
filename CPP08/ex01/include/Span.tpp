@@ -6,25 +6,19 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:54:21 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/16 18:04:41 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 18:50:51 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 class Span;
 
-template <typename Iter>
-void	Span::addNumber(Iter begin, Iter end)
+template <typename T>
+void	Span::addNumber(T begin, T end)
 {
-	//typename std::iterator_traits<Iter>::value_type;
-	
 	if (_size <= this->_nums.size() + (end - begin))
 		throw std::overflow_error("Span container cannot add so many values");
-	for (Iter it = begin; it != end; it++)
+	for (T it = begin; it != end; it++)
 	{
-		//try {
 		this->_nums.push_back(*it);
-		//}
-		//catch (std::error)
-		//	throw std::runtime_error("Value passed to container through iterator is not int");
 	}
 }

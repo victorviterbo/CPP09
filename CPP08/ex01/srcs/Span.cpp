@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:01:24 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/16 17:55:47 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 18:54:38 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,3 @@ void	Span::printValues()
 	for (std::vector<int>::iterator it = this->_nums.begin(); it != this->_nums.end(); ++it)
 		std::cout << *it << std::endl;
 }
-

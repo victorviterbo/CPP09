@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   EasyFind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:00:00 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/18 13:04:10 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:40:38 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@
 template < typename T >
 int easyfind(T container, int value)
 {
-	typename T::const_iterator	ret;
+	typename T::iterator	it = container.begin();
 	
-	ret = std::find(container.begin(), container.end(), value);
-	if (ret != container.end())
-		return (*ret);
+	//ret = std::find(container.begin(), container.end(), value);
+	while (it != container.end())
+	{
+		if (*it == value)
+			return (*it);
+		++it;
+	}
 	throw std::runtime_error("Value not in container");
 }

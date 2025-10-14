@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 15:58:49 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/16 17:54:31 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 18:52:24 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ class Span {
 	//SETTERS
 	//MEMBER FUNCTIONS
 		void			addNumber(int val);
-  		template <typename Iter>
-		void			addNumber(Iter begin, Iter end);
+  		template <typename T>
+		void			addNumber(T begin, T end);
 		unsigned int	shortestSpan();
 		unsigned int	longestSpan();
 		void			printValues();
 	private :
 		std::vector<int>	_nums;
 		unsigned int		_size;
+		
 };
 
 #include "Span.tpp"
