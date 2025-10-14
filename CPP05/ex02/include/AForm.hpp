@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:48:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 13:40:59 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:39:52 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ class AForm {
 
 		virtual void 		execute(Bureaucrat const &executor) const = 0;
 
-		void				beSigned(Bureaucrat &signer);
+		void				beSigned(const Bureaucrat &signer);
 		
 		std::string const	&getName(void) const;
 		bool				getSignedStatus(void) const;

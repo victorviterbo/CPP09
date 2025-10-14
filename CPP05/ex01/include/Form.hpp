@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 21:09:57 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 13:41:40 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:40:09 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ class Form {
 		Form &operator=(Form &other);
 		~Form();
 
-		void				beSigned(Bureaucrat &signer);
+		void				beSigned(const Bureaucrat &signer);
 		
 		std::string const	&getName(void) const;
 		bool				getSignedStatus(void) const;

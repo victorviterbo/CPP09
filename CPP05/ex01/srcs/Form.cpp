@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/14 15:49:05 by victorviter       #+#    #+#             */
+/*   Updated: 2025/10/14 15:49:07 by victorviter      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Form.hpp"
 
@@ -36,7 +46,7 @@ Form &Form::operator=(Form &other)
 
 Form::~Form() {}
 
-void	Form::beSigned(Bureaucrat &signer)
+void	Form::beSigned(const Bureaucrat &signer)
 {
     if (signer.getGrade() > this->_sign_req)
         throw GradeTooLowException();

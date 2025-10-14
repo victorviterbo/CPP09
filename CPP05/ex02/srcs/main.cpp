@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 14:27:47 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:38:53 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 int main(void)
 {
-	Bureaucrat  A("Boss", 2);
-	Bureaucrat  B("Victor", 12);
-	Bureaucrat  C("Gratte Papier en Chef", 25);	
+	Bureaucrat	A("Boss", 2);
+	Bureaucrat	B("Victor", 12);
+	Bureaucrat	C("Gratte Papier en Chef", 25);	
 	AForm		*forms[9];
 
 	for (int i = 0; i < 3; i++)

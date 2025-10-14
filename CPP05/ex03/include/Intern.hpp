@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:47:40 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/01 14:08:50 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:51:40 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ class Intern {
 	//GETTERS
 	//SETTERS
 	//MEMBER FUNCTIONS
-		AForm		*makeForm(std::string formName, std::string formTarget);
-		/*AForm		*makePresidentialPardonForm(std::string formTarget);
-		AForm		*makeRobotomyRequestForm(std::string formTarget);
-		AForm		*makeShrubberyCreationForm(std::string formTarget);*/
+		AForm			*makeForm(std::string formName, std::string formTarget);
+		static AForm	*makePresidentialPardonForm(std::string formTarget);
+		static AForm	*makeRobotomyRequestForm(std::string formTarget);
+		static AForm	*makeShrubberyCreationForm(std::string formTarget);
 	private :
 };
+
