@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:54:56 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/01 14:13:48 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 14:43:07 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Intern &Intern::operator=(Intern &other) {
 }
 
 Intern::~Intern() {}
-
+/*
 static AForm	*makePresidentialPardonForm(std::string formTarget)
 {
 	return (new PresidentialPardonForm(formTarget));
@@ -39,10 +39,10 @@ static AForm	*makeShrubberyCreationForm(std::string formTarget)
 {
 	return (new ShrubberyCreationForm(formTarget));
 }
-
+*/
 AForm	*Intern::makeForm(std::string formName, std::string formTarget)
 {
-	const int       FormStackSize = 3;
+	/*const int       FormStackSize = 3;
 	std::string 	names[FormStackSize] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
 	AForm            *(*formStack[FormStackSize])(std::string formTarget) = \
 						{&makePresidentialPardonForm, \
@@ -56,6 +56,12 @@ AForm	*Intern::makeForm(std::string formName, std::string formTarget)
 			std::cout << "Intern creates " << formName << std::endl;
 			return (formStack[i](formTarget));
 		}
-	}
+	}*/
+	if (formName == "PresidentialPardonForm")
+		return (new PresidentialPardonForm(formTarget));
+	else if (formName == "RobotomyRequestForm")
+		return (new PresidentialPardonForm(formTarget));
+	else if (formName == "ShrubberyCreationForm")
+		return (new PresidentialPardonForm(formTarget));
 	throw std::invalid_argument("Form Unknown");
 }

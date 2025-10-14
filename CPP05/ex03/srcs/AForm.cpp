@@ -32,7 +32,7 @@ AForm &AForm::operator=(AForm &other)
 
 AForm::~AForm() {}
 
-void	AForm::beSigned(Bureaucrat &signer)
+void	AForm::beSigned(const Bureaucrat &signer)
 {
     if (signer.getGrade() > this->_sign_req)
         throw GradeTooLowException();

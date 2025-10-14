@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:55:12 by victorviter       #+#    #+#             */
-/*   Updated: 2025/07/31 15:32:27 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 14:27:38 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
     if (this->getExecuteRequirement() < executor.getGrade())
         throw GradeTooLowException();
-    std::cout << "Informs that " << this->_target << " has been pardoned by Zaphod Beeblebrox.";
+    std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

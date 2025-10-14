@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/01 14:20:33 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 14:27:47 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 
 int main(void)
 {
-	Bureaucrat  A("Victor", 12);
-	Bureaucrat  B("Gratte Papier en Chef", 25);	
+	Bureaucrat  A("Boss", 2);
+	Bureaucrat  B("Victor", 12);
+	Bureaucrat  C("Gratte Papier en Chef", 25);	
 	AForm		*forms[9];
 
 	for (int i = 0; i < 3; i++)
-		forms[i] = new PresidentialPardonForm("Form_" + std::to_string(i) + "C.docx");  //l'extention du démon !
+		forms[i] = new PresidentialPardonForm("Form_" + std::to_string(i) + "C.docx");
 	for (int i = 3; i < 6; i++)
 		forms[i] = new RobotomyRequestForm("Form_" + std::to_string(i) + "C.docx");
 	for (int i = 6; i < 9; i++)
@@ -31,13 +32,22 @@ int main(void)
 	for (int i = 0; i < 9; i++)
 	{
 		try {
-			A.signForm(*forms[i]);
+			B.signForm(*forms[i]);
 		}
 		catch (AForm::GradeTooLowException &error){
 			std::cerr << "Error: " << error.what() << std::endl;
 		}
 	}
 	for (int i = 0; i < 9; i++)
+	{
+		try {
+			C.executeForm(*forms[i]);
+		}
+		catch (AForm::GradeTooLowException &error){
+			std::cerr << "Error: " << error.what() << std::endl;
+		}
+	}
+	for (int i = 0; i < 3; i++)
 	{
 		try {
 			A.executeForm(*forms[i]);
