@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 16:02:37 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/15 21:26:26 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 18:04:06 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ int main()
 	for (int i = 0; i < 4; i++)
 		std::cout << "array1[" << i << "]: " << array1[i] << "\n";
 	std::cout << "\n" << std::endl;
-
+	
 	::iter(array1, 4, minusOne);
 	
 	for (int i = 0; i < 4; i++)
 		std::cout << "array1[" << i << "]: " << array1[i] << "\n";
 	std::cout << "\n" << std::endl;
 	
-	
-	double	array2[] = {1.234, 3, 5, 6};
+	double	array2[] = {1.234, 3, 5.11, 6};
 	
 	for (int i = 0; i < 4; i++)
 		std::cout << "array2[" << i << "]: " << array2[i] << "\n";
@@ -74,6 +73,6 @@ int main()
 	for (int i = 0; i < 4; i++)
 		std::cout << "array2[" << i << "]: " << array2[i] << "\n";
 	std::cout << "\n" << std::endl;
-
+	
 	return (0);
 }

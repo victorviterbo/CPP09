@@ -43,6 +43,9 @@
         "unordered_map": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "*.tpp": "cpp"
+        "*.tpp": "cpp",
+        "__verbose_trap": "cpp",
+        "cstddef": "cpp",
+        "__log_hardening_failure": "cpp"
     }
 }
