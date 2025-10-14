@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:43 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 14:41:48 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 14:59:18 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat	Bureaucrat::operator++(int)
 {
-	if (this->_grade >= 150)
-		throw GradeTooLowException();
+	if (this->_grade <= 1)
+		throw GradeTooHighException();
 	this->_grade -= 1;
 	return (*this);
 }
 
 Bureaucrat	Bureaucrat::operator--(int)
 {
-	if (this->_grade <= 1)
-		throw GradeTooHighException();
+	if (this->_grade >= 150)
+		throw GradeTooLowException();
 	this->_grade++;
 	return (*this);
 }

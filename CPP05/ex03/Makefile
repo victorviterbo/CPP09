@@ -6,13 +6,13 @@
 #    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 15:40:14 by vviterbo          #+#    #+#              #
-#    Updated: 2025/08/01 13:47:11 by victorviter      ###   ########.fr        #
+#    Updated: 2025/10/14 14:59:26 by victorviter      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Bureaucrat
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-CC = c++
+CC = clang++
 
 INCLUDE = -I./include/
 
