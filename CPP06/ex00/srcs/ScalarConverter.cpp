@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:46 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 16:09:17 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 17:38:49 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,24 @@ ScalarConverter::~ScalarConverter() {}
 
 void		ScalarConverter::convert(std::string s) 
 {
-	if (((s[0] == '+' || s[0] == '-' || s[0] == 'n') && s.length() > 1)
-		|| isdigit(s[0]))
-		convertNumber(s);
+	if ((s == "inf" || s == "+inf" || s == "-inf" || s == "nan")
+		|| (s.find(".") != std::string::npos && s[0] != '.'))
+	{
+		if (s[s.size() - 1] == 'f')
+			convertFloat(s);
+		else
+			convertDouble(s);
+	}
+	else if (std::isdigit(s[0])
+		|| ((s[0] == '+' || s[0] == '-') && s.length() > 1))
+		convertInt(s);
 	else if (s.length() == 1)
 		convertChar(s);
+	else
+		std::cout << "Cannot convert the string" << std::endl;
 };
 
-void	ScalarConverter::convertNumber(std::string s)
+void	ScalarConverter::convertDouble(std::string s)
 {
 	char	*endPtr;
 	char	c;
@@ -31,12 +41,36 @@ void	ScalarConverter::convertNumber(std::string s)
 	int		i;
 	float	f;
 
+	if (s[0] == '+')
+		s.erase(0, 1);
 	d = strtod(s.c_str(), &endPtr);
-	if (endPtr == s.c_str())
+	if (*endPtr != '\0')
 	{
-		std::cout << "ERROR could not parse string. Exiting..." << std::endl;
+		std::cout << "ERROR could not parse string double. Exiting..." << std::endl;
 		return ;
 	}
+	if (s == "nan" || std::isnan(d))
+	{
+		std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
+		return ;
+	}
+	if (std::trunc(d) == d && INT_MIN < d && d < INT_MAX)
+	{
+		i = static_cast<int>(d);
+		if (i < 0 || i > 127)
+			std::cout << "char: impossible\n";
+		else
+		{
+			c = static_cast<char>(i);
+			if (std::isprint(c))
+				std::cout << "char: " << c << "\n";
+			else
+				std::cout << "char: Non displayable\n";
+		}
+		std::cout << "int: " << i << std::endl;
+	}
+	else
+		std::cout << "char: impossible\nint: impossible" << std::endl;
 	f = static_cast<float>(d);
 	if (d == HUGE_VAL || d == -HUGE_VAL)
 	{
@@ -44,22 +78,91 @@ void	ScalarConverter::convertNumber(std::string s)
 		<< f << "\ndouble: " << d << std::endl;
 		return ;
 	}
-	i = static_cast<int>(d);
-	if (s[0] == '+' || s[0] == '-' || s[0] == 'n' || d < 0 || d > 127)
-		std::cout << "char: impossible" << std::endl;
+	if (std::trunc(d) == d)
+		std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
+	return ;
+}
+
+void	ScalarConverter::convertFloat(std::string s)
+{
+	char	*endPtr;
+	char	c;
+	double	d;
+	int		i;
+	float	f;
+
+	if (s[0] == '+')
+		s.erase(0, 1);
+	if (s[s.size() - 1] == 'f')
+		s.erase(s.size() - 1, 1);
+	f = strtof(s.c_str(), &endPtr);
+	if (*endPtr != '\0')
+	{
+		std::cout << "ERROR could not parse string float. Exiting..." << std::endl;
+		return ;
+	}
+	if (s == "nanf" || std::isnan(f))
+	{
+		std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
+		return ;
+	}
+	if (std::trunc(f) == f && INT_MIN < f && f < INT_MAX)
+	{
+		i = static_cast<int>(f);
+		if (i < 0 || i > 127)
+			std::cout << "char: impossible\n";
+		else
+		{
+			c = static_cast<char>(i);
+			if (std::isprint(c))
+				std::cout << "char: " << c << "\n";
+			else
+				std::cout << "char: Non displayable\n";
+		}
+		std::cout << "int: " << i << std::endl;
+	}
+	else
+		std::cout << "char: impossible\nint: impossible" << std::endl;
+	if (std::trunc(f) == f)
+		std::cout << std::fixed << std::setprecision(1);
+	d = static_cast<double>(f);
+	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
+}
+
+void	ScalarConverter::convertInt(std::string s)
+{
+	size_t	endPos;
+	char	c;
+	double	d;
+	int		i;
+	float	f;
+	
+	i = std::stoi(s, &endPos);
+	if (endPos != s.length())
+	{
+		std::cout << "ERROR could not parse string int . Exiting..." << std::endl;
+		return ;
+	}
+	if (i < 0 || i > 127)
+	{
+		std::cout << "char: impossible\n";
+		std::cout << std::fixed << std::setprecision(1);
+	}
 	else
 	{
-		c = static_cast<char>(d);
+		c = static_cast<char>(i);
 		if (std::isprint(c))
-			std::cout << "char: " << c << std::endl;
+			std::cout << "char: " << c << "\n";
 		else
-			std::cout << "char: Non displayable" << std::endl;
+			std::cout << "char: Non displayable\n";
 	}
-	double intPart;
-	if (std::modf(d, &intPart) == 0.0)
+	f = static_cast<float>(i);
+	d = static_cast<double>(i);
+	std::cout << "int: " << i << std::endl;
+	if (std::trunc(f) == f)
 		std::cout << std::fixed << std::setprecision(1);
-	std::cout << "int: " << i << "\nfloat: " << f << "f\ndouble: " << d << std::endl;
-	return ;
+	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
 }
 
 void	ScalarConverter::convertChar(std::string s)
@@ -72,9 +175,12 @@ void	ScalarConverter::convertChar(std::string s)
 	c = s[0];
 	if (std::isprint(c))
 		std::cout << "char: " << c << std::endl;
-	std::cout << std::fixed << std::setprecision(1);
+	else
+		std::cout << "char:  Non displayable" << std::endl;
 	i = static_cast<int>(c);
 	f = static_cast<float>(i);
 	d = static_cast<double>(f);
-	std::cout << "int: " << i << "\nfloat: " << f << "f\ndouble: " << d << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
 }

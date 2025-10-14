@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:09:24 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/15 15:56:57 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 17:48:01 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int main(void)
 
 	mystery = Base::generate();
 	Base::identify(a);
+	Base::identify(*mystery);
+	mystery = Base::generate();
+	Base::identify(*mystery);
+	mystery = Base::generate();
+	Base::identify(mystery);
+	mystery = Base::generate();
 	Base::identify(*mystery);
 	delete a;
 	delete mystery;
