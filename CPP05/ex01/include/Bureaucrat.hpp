@@ -6,13 +6,12 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:56 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 21:58:36 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 22:22:44 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <cstdio>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -25,19 +24,19 @@ class Form;
 
 class Bureaucrat {
 	public :
-		class GradeTooHighException : public std::exception {
-			public:
-				const char* what() const _NOEXCEPT {
-					return "Grade is too high";
-				}
-		};
-
 		class GradeTooLowException : public std::exception {
 			public:
 				const char* what() const _NOEXCEPT {
-					return "Grade is too low";
+					return "Grade is too low! (Must be <= 150)";
 				}
 		};
+		class GradeTooHighException : public std::exception {
+			public:
+				const char* what() const _NOEXCEPT {
+					return "Grade is too high! (Must be >= 1)";
+				}
+		};
+
 		Bureaucrat();
 		Bureaucrat(const std::string name, int grade);
 		Bureaucrat(Bureaucrat &other);
@@ -50,7 +49,7 @@ class Bureaucrat {
 		std::string const	&getName(void) const;
 		unsigned int		getGrade(void) const;
 
-		void				signForm(Form paper);
+		void				signForm(Form &form) const;
 	private :
 		const std::string	_name;
 		unsigned int		_grade;

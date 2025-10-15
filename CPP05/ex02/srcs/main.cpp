@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 15:38:53 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 22:29:03 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ int main(void)
 	{
 		try {
 			C.executeForm(*forms[i]);
+		}
+		catch (AForm::GradeTooLowException &error){
+			std::cerr << "Error: " << error.what() << std::endl;
+		}
+	}
+	for (int i = 3; i < 6; i++)
+	{
+		try {
+			A.executeForm(*forms[i]);
+			A.executeForm(*forms[i]);
+			A.executeForm(*forms[i]);
+			A.executeForm(*forms[i]);
+			A.executeForm(*forms[i]);
+			A.executeForm(*forms[i]);
+			A.executeForm(*forms[i]);
 		}
 		catch (AForm::GradeTooLowException &error){
 			std::cerr << "Error: " << error.what() << std::endl;

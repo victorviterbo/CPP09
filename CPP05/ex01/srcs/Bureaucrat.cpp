@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:43 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 21:58:42 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/14 22:12:44 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ unsigned int		Bureaucrat::getGrade(void) const
 	return (this->_grade);
 }
 
-void	Bureaucrat::signForm(Form form)
+void	Bureaucrat::signForm(Form &form)
 {
 	try {
 		form.beSigned(*this);
