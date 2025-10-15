@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:46 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 17:38:49 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 19:22:23 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ScalarConverter::convertDouble(std::string s)
 		std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
 		return ;
 	}
-	if (std::trunc(d) == d && INT_MIN < d && d < INT_MAX)
+	if (trunc(d) == d && INT_MIN < d && d < INT_MAX)
 	{
 		i = static_cast<int>(d);
 		if (i < 0 || i > 127)
@@ -78,7 +78,7 @@ void	ScalarConverter::convertDouble(std::string s)
 		<< f << "\ndouble: " << d << std::endl;
 		return ;
 	}
-	if (std::trunc(d) == d)
+	if (trunc(d) == d)
 		std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
 	return ;
@@ -107,7 +107,7 @@ void	ScalarConverter::convertFloat(std::string s)
 		std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
 		return ;
 	}
-	if (std::trunc(f) == f && INT_MIN < f && f < INT_MAX)
+	if (trunc(f) == f && static_cast<float>(INT_MIN) < f && f < static_cast<float>(INT_MAX))
 	{
 		i = static_cast<int>(f);
 		if (i < 0 || i > 127)
@@ -124,7 +124,7 @@ void	ScalarConverter::convertFloat(std::string s)
 	}
 	else
 		std::cout << "char: impossible\nint: impossible" << std::endl;
-	if (std::trunc(f) == f)
+	if (trunc(f) == f)
 		std::cout << std::fixed << std::setprecision(1);
 	d = static_cast<double>(f);
 	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
@@ -160,7 +160,7 @@ void	ScalarConverter::convertInt(std::string s)
 	f = static_cast<float>(i);
 	d = static_cast<double>(i);
 	std::cout << "int: " << i << std::endl;
-	if (std::trunc(f) == f)
+	if (trunc(f) == f)
 		std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
 }
@@ -176,7 +176,7 @@ void	ScalarConverter::convertChar(std::string s)
 	if (std::isprint(c))
 		std::cout << "char: " << c << std::endl;
 	else
-		std::cout << "char:  Non displayable" << std::endl;
+		std::cout << "char: Non displayable" << std::endl;
 	i = static_cast<int>(c);
 	f = static_cast<float>(i);
 	d = static_cast<double>(f);

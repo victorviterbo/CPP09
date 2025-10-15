@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:59:13 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 15:48:26 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:22:31 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ std::string	const &ShrubberyCreationForm::getTarget(void) const
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	if (this->getExecuteRequirement() < executor.getGrade())
+	if (!this->getSignedStatus())
+		throw UnsignedFormException();
+	else if (this->getExecuteRequirement() < executor.getGrade())
 		throw GradeTooLowException();
-
+	
 	std::ofstream	graft;
 
 	graft.open(std::string(this->_target + "_shrubbery").c_str());

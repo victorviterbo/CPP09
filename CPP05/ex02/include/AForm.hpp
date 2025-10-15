@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:48:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 15:44:32 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:18:35 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ class AForm {
 				}
 		};
 		
+		class UnsignedFormException : public std::exception {
+			public:
+				const char* what() const throw() {
+					return "Form is not signed";
+				}
+		};
+
 		AForm();
 		AForm(std::string name, const unsigned int sign_grade, const unsigned int execute_grade);
 		AForm(AForm &other);

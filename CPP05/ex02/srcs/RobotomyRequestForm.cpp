@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:48:34 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 15:48:41 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:20:11 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ std::string const	&RobotomyRequestForm::getTarget(void) const
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
-	if (this->getExecuteRequirement() < executor.getGrade())
+	if (!this->getSignedStatus())
+		throw UnsignedFormException();
+	else if (this->getExecuteRequirement() < executor.getGrade())
 		throw GradeTooLowException();
+	
 	std::cout << "* BZZZZZ BRRRRR BZZZZZZ * (drilling noises)" << std::endl;
 	int n = rand() % 10;
 	if (n >= 5)

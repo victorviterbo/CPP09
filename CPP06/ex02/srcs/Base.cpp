@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 14:31:27 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/15 15:26:04 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 17:43:28 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #include "B.hpp"
 #include "C.hpp"
 
-Base::~Base() {}
+Base::~Base()
+{
+	srand(nanosec_seed());
+}
 
-Base    *Base::generate(void)
+Base	*Base::generate(void)
 {
 	Base	*ret;
 
-	srand(nanosec_seed());
 	int n = rand() % 3;
 	if (n == 0)
 		ret = new A;
@@ -83,7 +85,7 @@ void Base::identify(Base& p)
 
 uint64_t nanosec_seed()
 {
-    struct timespec t;
-    clock_gettime(CLOCK_REALTIME, &t);
-    return (uint64_t)t.tv_sec * 1000000000ULL + t.tv_nsec;
+	struct timespec t;
+	clock_gettime(CLOCK_REALTIME, &t);
+	return (uint64_t)t.tv_sec * 1000000000ULL + t.tv_nsec;
 }

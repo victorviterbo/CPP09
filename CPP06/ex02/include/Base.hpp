@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 14:26:26 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/15 15:15:36 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 17:42:47 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
