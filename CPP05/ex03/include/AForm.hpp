@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:48:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 14:47:22 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:44:32 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class AForm {
 		};
 		
 		AForm();
-		AForm(std::string name, bool is_signed, unsigned int sign_grade, unsigned int execute_grade);
+		AForm(std::string name, const unsigned int sign_grade, const unsigned int execute_grade);
 		AForm(AForm &other);
 		virtual AForm &operator=(AForm &other);
 		virtual ~AForm() = 0;
@@ -53,10 +53,10 @@ class AForm {
 		unsigned int		getSignRequirement(void) const;
 		unsigned int		getExecuteRequirement(void) const;
 	private :
-		std::string const	_name;
-		bool				_signed;
-		unsigned int		_sign_req;
-		unsigned int		_execute_req;
+		std::string const		_name;
+		bool					_signed;
+		const unsigned int		_sign_req;
+		const unsigned int		_execute_req;
 };
 
 std::ostream &operator<<(std::ostream &os, const AForm &operand);

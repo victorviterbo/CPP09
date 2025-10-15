@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:48:34 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 22:32:38 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:48:41 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ RobotomyRequestForm::RobotomyRequestForm()
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : \
-AForm("RobotomyRequestForm", false, 72, 45)
+AForm("RobotomyRequestForm", 72, 45)
 {
 	this->_target = target;
 	srand(seed());
 }
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &other) : \
-AForm(other.getName(), other.getSignedStatus(), other.getSignRequirement(), other.getExecuteRequirement())
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &other) : AForm(other)
 {
 	this->_target = other.getTarget();
 	srand(seed());

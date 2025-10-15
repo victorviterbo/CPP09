@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:59:13 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 15:12:33 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:48:26 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 ShrubberyCreationForm::ShrubberyCreationForm() {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : \
-AForm("ShrubberyCreationForm", false, 145, 137)
+AForm("ShrubberyCreationForm", 145, 137)
 {
 	this->_target = target;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &other) : \
-AForm(other.getName(), other.getSignedStatus(), other.getSignRequirement(), other.getExecuteRequirement())
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &other) : AForm(other)
 {
 	this->_target = other.getTarget();
 }

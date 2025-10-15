@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 22:07:18 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:37:32 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int main(void)
 
 	try {
 		Form	Doc10("Probably rubish", 1000, 2);
+	}
+	catch (const Bureaucrat::GradeTooLowException &error) {
+		std::cerr << "Bureaucrat Error: " << error.what() << std::endl;
 	}
 	catch (const Form::GradeTooLowException &error) {
 		std::cerr << "Error: " << error.what() << std::endl;

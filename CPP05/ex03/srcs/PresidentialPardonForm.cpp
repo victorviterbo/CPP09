@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:55:12 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 15:05:20 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:48:50 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 PresidentialPardonForm::PresidentialPardonForm() {};
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", false, 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5)
 {
 	this->_target = target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &other) : \
-AForm(other.getName(), other.getSignedStatus(), other.getSignRequirement(), other.getExecuteRequirement())
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &other) : AForm(other)
 {
 	this->_target = other.getTarget();
 }

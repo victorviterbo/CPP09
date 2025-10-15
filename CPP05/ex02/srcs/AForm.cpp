@@ -3,40 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:39:19 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 15:39:46 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:46:36 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm() {}
-
-AForm::AForm(std::string name, bool is_signed, unsigned int sign_grade, unsigned int execute_grade) : _name(name)
+AForm::AForm()
+	:	_name("unknown form"),
+		_sign_req(1),
+		_execute_req(1)
+{}
+AForm::AForm(std::string name, const unsigned int sign_grade, const unsigned int execute_grade) : _name(name), _sign_req(sign_grade), _execute_req(execute_grade)
 {
 	if (sign_grade < 1 || execute_grade < 1)
 		throw GradeTooHighException();
 	else if (sign_grade > 150 || execute_grade > 150)
 		throw GradeTooLowException();
-	this->_signed = is_signed;
-	this->_sign_req = sign_grade;
-	this->_execute_req = execute_grade;
+	this->_signed = false;
 }
 
-AForm::AForm(AForm &other) : _name(other._name)
+AForm::AForm(AForm &other) : _name(other._name), _sign_req(other._sign_req), _execute_req(other._execute_req)
 {
-	this->_signed = other._signed;
-	this->_sign_req = other._sign_req;
-	this->_execute_req = other._execute_req;
 }
 
 AForm &AForm::operator=(AForm &other)
 {
+	if (this != &other)
 	this->_signed = other._signed;
-	this->_sign_req = other._sign_req;
-	this->_execute_req = other._execute_req;
 	return (*this);
 }
 
