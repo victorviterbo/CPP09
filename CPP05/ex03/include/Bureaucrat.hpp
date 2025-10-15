@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:56 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 22:19:00 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 14:51:10 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ class Bureaucrat {
 	public :
 		class GradeTooLowException : public std::exception {
 			public:
-				const char* what() const _NOEXCEPT {
+				const char* what() const throw() {
 					return "Grade is too low! (Must be <= 150)";
 				}
 		};
 		class GradeTooHighException : public std::exception {
 			public:
-				const char* what() const _NOEXCEPT {
+				const char* what() const throw() {
 					return "Grade is too high! (Must be >= 1)";
 				}
 		};
@@ -59,4 +59,3 @@ class Bureaucrat {
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &operand);
-

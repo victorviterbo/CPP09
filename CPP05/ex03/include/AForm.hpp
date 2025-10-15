@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:48:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 15:40:17 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 14:47:22 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ class AForm {
 	public :
 		class GradeTooHighException : public std::exception {
 			public:
-				const char* what() const _NOEXCEPT {
+				const char* what() const throw() {
 					return "Grade is too high";
 				}
 		};
 
 		class GradeTooLowException : public std::exception {
 			public:
-				const char* what() const _NOEXCEPT {
+				const char* what() const throw() {
 					return "Grade is too low";
 				}
 		};

@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 21:09:57 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 14:39:55 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:51:53 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ class Form {
 
 		void				beSigned(const Bureaucrat &signer);
 		
-		std::string const	&getName(void) const;
+		const std::string	&getName(void) const;
 		bool				getSignedStatus(void) const;
-		int		getSignRequirement(void) const;
-		int		getExecuteRequirement(void) const;
+		unsigned int		getSignRequirement(void) const;
+		unsigned int		getExecuteRequirement(void) const;
 	private :
 		const std::string	_name;
 		bool				_signed;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:05:43 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 22:12:44 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 14:49:01 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ unsigned int		Bureaucrat::getGrade(void) const
 	return (this->_grade);
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signForm(Form &form) const
 {
 	try {
 		form.beSigned(*this);

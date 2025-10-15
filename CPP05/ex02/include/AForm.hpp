@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 08:48:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 22:22:39 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:09:27 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 
 class Bureaucrat;
 
-class AForm{
+class AForm {
 	public :
 		class GradeTooHighException : public std::exception {
 			public:
-				const char* what() const _NOEXCEPT {
+				const char* what() const throw() {
 					return "Grade is too high";
 				}
 		};
 
 		class GradeTooLowException : public std::exception {
 			public:
-				const char* what() const _NOEXCEPT {
+				const char* what() const throw() {
 					return "Grade is too low";
 				}
 		};

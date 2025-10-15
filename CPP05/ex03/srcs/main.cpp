@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 22:05:47 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:02:44 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Intern.hpp"
 
+inline std::string intToString(int integer)
+{
+    std::stringstream	stream;
+    stream << integer;
+    return stream.str();
+}
+
 int main(void)
 {
 	Bureaucrat	A("Victor", 12);
@@ -24,11 +31,11 @@ int main(void)
 	AForm		*forms[9];
 
 	for (int i = 0; i < 3; i++)
-		forms[i] = sbire.makeForm("PresidentialPardonForm", "form_" + std::to_string(i) + "C.docx");
+		forms[i] = sbire.makeForm("PresidentialPardonForm", "form_" + intToString(i) + "C.docx");
 	for (int i = 3; i < 6; i++)
-		forms[i] = sbire.makeForm("RobotomyRequestForm", "form_" + std::to_string(i) + "C.docx");
+		forms[i] = sbire.makeForm("RobotomyRequestForm", "form_" + intToString(i) + "C.docx");
 	for (int i = 6; i < 9; i++)
-		forms[i] = sbire.makeForm("ShrubberyCreationForm", "form_" + std::to_string(i) + "C.docx");
+		forms[i] = sbire.makeForm("ShrubberyCreationForm", "form_" + intToString(i) + "C.docx");
 	for (int i = 0; i < 9; i++)
 	{
 		try {

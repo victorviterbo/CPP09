@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:59:13 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 21:39:30 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:12:35 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 
 	std::ofstream	graft;
 
-	graft.open(this->_target + "_shrubbery");
+	graft.open(std::string(this->_target + "_shrubbery").c_str());
 	graft << this->tree_str << std::endl;
 	graft.close();
 }
