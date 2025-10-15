@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:46 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 19:22:23 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:32:18 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,18 +132,19 @@ void	ScalarConverter::convertFloat(std::string s)
 
 void	ScalarConverter::convertInt(std::string s)
 {
-	size_t	endPos;
+	//size_t	endPos;
 	char	c;
 	double	d;
 	int		i;
 	float	f;
 	
-	i = std::stoi(s, &endPos);
+	i = atoi(s.c_str());
+	/*endPos = 1;
 	if (endPos != s.length())
 	{
 		std::cout << "ERROR could not parse string int . Exiting..." << std::endl;
 		return ;
-	}
+	}*/
 	if (i < 0 || i > 127)
 	{
 		std::cout << "char: impossible\n";

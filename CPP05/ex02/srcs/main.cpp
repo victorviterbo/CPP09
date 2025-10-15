@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 17:20:45 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 15:00:56 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:27:04 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main(void)
 {
 	Bureaucrat	A("Boss", 2);
 	Bureaucrat	B("Victor", 12);
-	Bureaucrat	C("Gratte Papier en Chef", 25);	
+	Bureaucrat	C("Gratte Papier en Chef", 90);	
 	AForm		*forms[9];
 
 	for (int i = 0; i < 3; i++)
@@ -43,7 +43,7 @@ int main(void)
 	for (int i = 0; i < 9; i++)
 	{
 		try {
-			B.signForm(*forms[i]);
+			C.signForm(*forms[i]);
 		}
 		catch (AForm::GradeTooLowException &error){
 			std::cerr << "Error: " << error.what() << std::endl;
@@ -57,7 +57,11 @@ int main(void)
 		catch (AForm::GradeTooLowException &error){
 			std::cerr << "Error: " << error.what() << std::endl;
 		}
+		catch (AForm::UnsignedFormException &error){
+			std::cerr << "Error: " << error.what() << std::endl;
+		}
 	}
+	return (0);
 	for (int i = 3; i < 6; i++)
 	{
 		try {
