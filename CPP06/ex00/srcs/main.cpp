@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:45:25 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 16:23:44 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/16 11:14:02 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 int	main(int argc, char *argv[])
 {
-	while (argc > 1)
-	{
-		ScalarConverter::convert(argv[argc - 1]);
-		argc--;
-	}
-	//ScalarConverter::convert("nan");
-	//ScalarConverter::convert("18");
+	for (int i = 1; i < argc; ++i)
+		ScalarConverter::convert(argv[i]);
 }

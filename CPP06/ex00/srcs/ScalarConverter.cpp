@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:46 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/15 19:32:18 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/16 12:37:07 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ ScalarConverter::~ScalarConverter() {}
 
 void		ScalarConverter::convert(std::string s) 
 {
-	if ((s == "inf" || s == "+inf" || s == "-inf" || s == "nan")
+	if (s.length() == 0)
+		std::cout << "Cannot convert the string" << std::endl;
+	else if ((s == "inff" || s == "+inff" || s == "-inff" || s == "nanf"
 		|| (s.find(".") != std::string::npos && s[0] != '.'))
-	{
-		if (s[s.size() - 1] == 'f')
-			convertFloat(s);
-		else
-			convertDouble(s);
-	}
+		&& s[s.size() - 1] == 'f')
+		convertFloat(s);
+	else if ((s == "inf" || s == "+inf" || s == "-inf" || s == "nan")
+		|| (s.find(".") != std::string::npos && s[0] != '.'))
+		convertDouble(s);
 	else if (std::isdigit(s[0])
 		|| ((s[0] == '+' || s[0] == '-') && s.length() > 1))
 		convertInt(s);
@@ -41,10 +42,8 @@ void	ScalarConverter::convertDouble(std::string s)
 	int		i;
 	float	f;
 
-	if (s[0] == '+')
-		s.erase(0, 1);
 	d = strtod(s.c_str(), &endPtr);
-	if (*endPtr != '\0')
+	if (errno == ERANGE || *endPtr != '\0')
 	{
 		std::cout << "ERROR could not parse string double. Exiting..." << std::endl;
 		return ;
@@ -54,7 +53,7 @@ void	ScalarConverter::convertDouble(std::string s)
 		std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
 		return ;
 	}
-	if (trunc(d) == d && INT_MIN < d && d < INT_MAX)
+	if (trunc(d) == d && std::numeric_limits<int>::min() < d && d < std::numeric_limits<int>::max())
 	{
 		i = static_cast<int>(d);
 		if (i < 0 || i > 127)
@@ -71,16 +70,22 @@ void	ScalarConverter::convertDouble(std::string s)
 	}
 	else
 		std::cout << "char: impossible\nint: impossible" << std::endl;
-	f = static_cast<float>(d);
-	if (d == HUGE_VAL || d == -HUGE_VAL)
+	if (std::numeric_limits<float>::min() < d && d < std::numeric_limits<float>::max())
 	{
-		std::cout << "char: impossible\nint: impossible\nfloat: " \
-		<< f << "\ndouble: " << d << std::endl;
-		return ;
+		f = static_cast<float>(d);
+		if (trunc(f) == f)
+			std::cout << std::fixed << std::setprecision(1);
+		std::cout << "float: " << f << "f" << std::endl;
 	}
+	else if (d == HUGE_VAL)
+		std::cout << "float: inff" << std::endl;
+	else if (d == -HUGE_VAL)
+		std::cout << "float: -inff" << std::endl;
+	else
+		std::cout << "float: impossible" << std::endl;
 	if (trunc(d) == d)
 		std::cout << std::fixed << std::setprecision(1);
-	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
+	std::cout << "double: " << d << std::endl;
 	return ;
 }
 
@@ -97,7 +102,7 @@ void	ScalarConverter::convertFloat(std::string s)
 	if (s[s.size() - 1] == 'f')
 		s.erase(s.size() - 1, 1);
 	f = strtof(s.c_str(), &endPtr);
-	if (*endPtr != '\0')
+	if (errno == ERANGE || *endPtr != '\0')
 	{
 		std::cout << "ERROR could not parse string float. Exiting..." << std::endl;
 		return ;
@@ -107,7 +112,7 @@ void	ScalarConverter::convertFloat(std::string s)
 		std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
 		return ;
 	}
-	if (trunc(f) == f && static_cast<float>(INT_MIN) < f && f < static_cast<float>(INT_MAX))
+	if (trunc(f) == f && std::numeric_limits<int>::min() < f && f < std::numeric_limits<int>::max())
 	{
 		i = static_cast<int>(f);
 		if (i < 0 || i > 127)
@@ -132,38 +137,62 @@ void	ScalarConverter::convertFloat(std::string s)
 
 void	ScalarConverter::convertInt(std::string s)
 {
-	//size_t	endPos;
 	char	c;
 	double	d;
 	int		i;
 	float	f;
+	long	l;
+	char	*endPtr;
 	
-	i = atoi(s.c_str());
-	/*endPos = 1;
-	if (endPos != s.length())
+	l = strtol(s.c_str(), &endPtr, 10);
+	if (errno == ERANGE || *endPtr != '\0')
 	{
-		std::cout << "ERROR could not parse string int . Exiting..." << std::endl;
+		std::cout << "ERROR could not parse string int. Exiting..." << std::endl;
 		return ;
-	}*/
-	if (i < 0 || i > 127)
+	}
+	if (l == 0)
 	{
-		std::cout << "char: impossible\n";
-		std::cout << std::fixed << std::setprecision(1);
+		unsigned int it = 0;
+		if (s[0] == '+' || s[0] == '-')
+			it = 1;
+		for (; it < s.length(); ++it)
+		{
+			if (s[it] != 0)
+			{
+				std::cout << "Cannot convert the string" << std::endl;
+				return ;
+			}
+		}
+	}
+	if (std::numeric_limits<int>::max() <= l || l <= std::numeric_limits<int>::min())
+	{
+		std::cout << "char: impossible\nint: impossible" << std::endl;
 	}
 	else
 	{
-		c = static_cast<char>(i);
-		if (std::isprint(c))
-			std::cout << "char: " << c << "\n";
+		i = static_cast<int>(l);
+		if (i < 0 || i > 127)
+			std::cout << "char: impossible\n";
 		else
-			std::cout << "char: Non displayable\n";
+		{
+			c = static_cast<char>(i);
+			if (std::isprint(c))
+				std::cout << "char: " << c << "\n";
+			else
+				std::cout << "char: Non displayable\n";
+		}
+		std::cout << "int: " << i << std::endl;
 	}
-	f = static_cast<float>(i);
-	d = static_cast<double>(i);
-	std::cout << "int: " << i << std::endl;
-	if (trunc(f) == f)
-		std::cout << std::fixed << std::setprecision(1);
-	std::cout << "float: " << f << "f\ndouble: " << d << std::endl;
+	std::cout << std::fixed << std::setprecision(1);
+	if (std::numeric_limits<float>::min() < l && l < std::numeric_limits<float>::max())
+	{
+		f = static_cast<float>(l);
+		std::cout << "float: " << f << "f" << std::endl;
+	}
+	else
+		std::cout << "float: impossible" << std::endl;
+	d = static_cast<double>(l);
+	std::cout << "double: " << d << std::endl;
 }
 
 void	ScalarConverter::convertChar(std::string s)

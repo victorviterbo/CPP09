@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:29 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 17:07:40 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/16 12:18:49 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <string>
 #include <cmath>
 #include <climits>
+#include <limits>
+#include <cerrno>
 
 class ScalarConverter {
 	public :
