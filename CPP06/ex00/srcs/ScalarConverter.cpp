@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 19:50:46 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/16 12:37:07 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/16 14:53:41 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ScalarConverter::convertDouble(std::string s)
 	}
 	else
 		std::cout << "char: impossible\nint: impossible" << std::endl;
-	if (std::numeric_limits<float>::min() < d && d < std::numeric_limits<float>::max())
+	if (-std::numeric_limits<float>::max() < d && d < std::numeric_limits<float>::max())
 	{
 		f = static_cast<float>(d);
 		if (trunc(f) == f)
@@ -157,14 +157,14 @@ void	ScalarConverter::convertInt(std::string s)
 			it = 1;
 		for (; it < s.length(); ++it)
 		{
-			if (s[it] != 0)
+			if (s[it] != '0')
 			{
 				std::cout << "Cannot convert the string" << std::endl;
 				return ;
 			}
 		}
 	}
-	if (std::numeric_limits<int>::max() <= l || l <= std::numeric_limits<int>::min())
+	if (std::numeric_limits<int>::max() < l || l < std::numeric_limits<int>::min())
 	{
 		std::cout << "char: impossible\nint: impossible" << std::endl;
 	}
@@ -184,7 +184,7 @@ void	ScalarConverter::convertInt(std::string s)
 		std::cout << "int: " << i << std::endl;
 	}
 	std::cout << std::fixed << std::setprecision(1);
-	if (std::numeric_limits<float>::min() < l && l < std::numeric_limits<float>::max())
+	if (-std::numeric_limits<float>::max() <= l && l <= std::numeric_limits<float>::max())
 	{
 		f = static_cast<float>(l);
 		std::cout << "float: " << f << "f" << std::endl;
