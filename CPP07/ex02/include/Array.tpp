@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:57:52 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 18:14:23 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/16 13:44:49 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ Array<T>::~Array()
 }
 
 template < typename T >
-size_t  Array<T>::size(void)
+size_t	Array<T>::size(void)
 {
 	return (this->_size);
 }

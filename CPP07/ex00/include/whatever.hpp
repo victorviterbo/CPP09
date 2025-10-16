@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:58:19 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 17:51:11 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/16 13:44:39 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 #include <iostream>
 
 template <typename T>
-T   max(T a, T b) {
-    return (a > b) ? a : b;
+T	max(T a, T b) {
+	return (a > b) ? a : b;
 }
 
 template <typename T>
-T   min(T a, T b) {
-    return (a < b) ? a : b;
+T	min(T a, T b) {
+	return (a < b) ? a : b;
 }
 
 template <typename T>
-void    swap(T &a, T &b)
+void	swap(T &a, T &b)
 {
-    T   tmp;
+	T	tmp;
 
-    tmp = a;
-    a = b;
-    b = tmp;
+	tmp = a;
+	a = b;
+	b = tmp;
 }
