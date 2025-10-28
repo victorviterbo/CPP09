@@ -6,62 +6,51 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:32:03 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/16 13:44:24 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:57:13 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <Array.hpp>
 
-#define MAX_VAL 750
-
 int main(int, char**)
 {
-	Array<int> numbers(MAX_VAL);
-	int* mirror = new int[MAX_VAL];
-	srand(time(NULL));
-	for (int i = 0; i < MAX_VAL; i++)
-	{
-		int value = rand();
-		numbers[i] = value;
-		mirror[i] = value;
-	}
-	std::cout << numbers.size() << std::endl;
-	std::cout << "numbers[123] = " << numbers[123] << std::endl;
-	numbers[123] += 1;
-	std::cout << "numbers[123] = " << numbers[123] << std::endl;
-	numbers[123] -= 1;
-	{
-		Array<int> tmp = numbers;
-		Array<int> test(tmp);
-		for (int i = 0; i < MAX_VAL; i++)
-		{
-			if (tmp[i] != test[i] || tmp[i] != numbers[i])
-			{
-				std::cerr << "didn't save the same value!!" << std::endl;
-				return 1;
-			}
-		}
-		for (int i = 0; i < MAX_VAL; i++)
-		{
-			tmp[i] = tmp[i] + 1;
-		}
-		for (int i = 0; i < MAX_VAL; i++)
-		{
-			if (tmp[i] == test[i] || tmp[i] == numbers[i])
-			{
-				std::cerr << "copy is not a deep copy" << std::endl;
-				return 1;
-			}
-		}
-	}
+	Array<int> zero_sized(0);
+	std::cout << "zero_sized.size = " << zero_sized.size() << std::endl;
 
-	for (int i = 0; i < MAX_VAL; i++)
+	const int arr_size = 200;
+	Array<int> numbers(arr_size);
+	for (int i = 0; i < arr_size; i++)
+		numbers[i] = i;
+
+	Array<int> arr_copy(numbers);
+
+	std::cout << "number size = " << numbers.size() << ", arr_copy size = " << numbers.size() << std::endl;
+	std::cout << "numbers[123] = " << numbers[123] << ", arr_copy[123] = " << arr_copy[123] << std::endl;
+	numbers[123] += 1;
+	std::cout << "numbers[123] = " << numbers[123] << ", arr_copy[123] = " << arr_copy[123] << std::endl;
 	{
-		if (mirror[i] != numbers[i])
+		Array<int> arr_copy2 = numbers;
+		Array<int> arr_equal = numbers;
+		for (int i = 0; i < arr_size; i++)
 		{
-			std::cerr << "didn't save the same value!!" << std::endl;
-			return 1;
+			if (numbers[i] != arr_copy2[i] || numbers[i] != arr_equal[i])
+			{
+				std::cout << "Copy constructor failed !" << std::endl;
+				return 1;
+			}
+		}
+		for (int i = 0; i < arr_size; i++)
+		{
+			numbers[i] = numbers[i] + 1;
+		}
+		for (int i = 0; i < arr_size; i++)
+		{
+			if (numbers[i] == arr_copy2[i])
+			{
+				std::cout << "copy is not a deep copy" << std::endl;
+				return 1;
+			}
 		}
 	}
 	try
@@ -70,20 +59,15 @@ int main(int, char**)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << "Accessing -2: " << e.what() << std::endl;
 	}
 	try
 	{
-		numbers[MAX_VAL] = 0;
+		numbers[arr_size] = 0;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << "Accessing arr_size: " << e.what() << std::endl;
 	}
-	for (int i = 0; i < MAX_VAL; i++)
-	{
-		numbers[i] = rand();
-	}
-	delete [] mirror;
 	return 0;
 }

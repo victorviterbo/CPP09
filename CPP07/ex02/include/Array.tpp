@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:57:52 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/16 13:44:49 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:32:43 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Array<T>::Array(unsigned int n)
 	this->_array = new T[n];
 	this->_size = n;
 	for (unsigned int i = 0; i < n; ++i)
-		std::memset(&_array[i], 0, sizeof(T));
+		memset(&_array[i], 0, sizeof(T));
 }
 
 template < typename T >

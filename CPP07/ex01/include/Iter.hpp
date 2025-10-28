@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   Iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 15:58:19 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 18:03:01 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/28 14:39:53 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+
+template < typename T>
+void print(T &elem)
+{
+	std::cout << elem << std::endl;
+}
 
 template < typename T>
 void	iter(T *array, size_t len, void (*func)(T &))

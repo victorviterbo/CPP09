@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:57:55 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/16 13:44:14 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:36:34 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include <stdexcept>
+#include <cstdlib>
+#include <ctime>
 
 template < typename T >
 class Array {
