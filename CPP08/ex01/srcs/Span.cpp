@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:01:24 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 18:54:38 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/28 17:19:02 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,20 @@ Span::~Span() {}
 
 void	Span::addNumber(int val)
 {
-	if (_size <= this->_nums.size())
+	if (this->_nums.size() >= _size)
 		throw std::overflow_error("Span container already full");
 	this->_nums.push_back(val);
 }
 
 unsigned int	Span::shortestSpan()
 {
-	unsigned int	shortest;
+	unsigned int		shortest;
+	std::vector<int>	arr_copy(this->_size);
 
+	arr_copy = this->_nums;
+	std::sort(arr_copy.begin(), arr_copy.end());
 	shortest = std::numeric_limits<unsigned int>::max();
-	if (!std::is_sorted(this->_nums.begin(), this->_nums.end()))
-		std::sort(this->_nums.begin(), this->_nums.end());
-	for (std::vector<int>::iterator it = this->_nums.begin(); it != this->_nums.end(); ++it)
+	for (std::vector<int>::iterator it = arr_copy.begin(); it + 1 != arr_copy.end(); ++it)
 	{
 		if (shortest > static_cast<unsigned int>(*(it + 1) - *it))
 			shortest = static_cast<unsigned int>(*(it + 1) - *it);
@@ -59,12 +60,10 @@ unsigned int	Span::shortestSpan()
 
 unsigned int	Span::longestSpan()
 {
-	if (!std::is_sorted(this->_nums.begin(), this->_nums.end()))
-		std::sort(this->_nums.begin(), this->_nums.end());
-	return (*(this->_nums.end() - 1) - *(this->_nums.begin()));
+	return (*std::max_element(this->_nums.begin(), this->_nums.end()) - *std::min_element(this->_nums.begin(), this->_nums.end()));
 }
 
-void	Span::printValues()
+void			Span::printValues()
 {
 	for (std::vector<int>::iterator it = this->_nums.begin(); it != this->_nums.end(); ++it)
 		std::cout << *it << std::endl;

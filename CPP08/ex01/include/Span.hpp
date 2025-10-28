@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 15:58:49 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/14 18:52:24 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/28 16:18:13 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <climits>
+#include <limits>
 #include <vector>
-#include <array>
 #include <deque>
-#include <forward_list>
 #include <list>
 #include <stack>
 #include <queue>
