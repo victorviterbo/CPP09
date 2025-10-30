@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FordJohnson.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/31 20:21:09 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/10/30 13:20:42 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 std::deque<int>	recursiveMergeInsert(std::deque<int> mixed)
 {
-	std::deque<int>		main;
+	std::deque<void *>		main_d;
+	std::list<void *>		main_l;
 	std::deque<int>		highVals;
-	std::map<int, int>	predecessors;
 	size_t				i = 0;
 
 	while (i < mixed.size())
