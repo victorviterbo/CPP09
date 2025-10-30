@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:01:21 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/30 14:59:28 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/30 12:14:08 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(void)
 	std::cout << "shortest = " << cont.shortestSpan() << std::endl;
 	cont.printValues();
 
-	const int			Bigsize = 10000;
+	const int			Bigsize = 10000000;
 	Span				Bigcont(Bigsize);
 	for (double i = 0; i < Bigsize; ++i)
 	{
@@ -57,42 +57,4 @@ int main(void)
 	}
 	std::cout << "longest = " << Bigcont.longestSpan() << std::endl;
 	std::cout << "shortest = " << Bigcont.shortestSpan() << std::endl;
-
-	Span				cont2(5);
-	int					arr3[] = {1, 2, 4, 6, 8};
-
-	cont2.addNumber(arr3, arr3 + 5);
-	cont2.printValues();
-
-	Span			empty(0);
-
-	try {
-		std::cout << "longest = " << empty.longestSpan() << std::endl;
-	}
-	catch (std::runtime_error &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try {
-	std::cout << "shortest = " << empty.shortestSpan() << std::endl;
-	}
-	catch (std::runtime_error &e) {
-		std::cout << e.what() << std::endl;
-	}
-
-
-	Span			one(1);
-
-	one.addNumber(12);
-	try {
-		std::cout << "longest = " << one.longestSpan() << std::endl;
-	}
-	catch (std::runtime_error &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try {
-	std::cout << "shortest = " << one.shortestSpan() << std::endl;
-	}
-	catch (std::runtime_error &e) {
-		std::cout << e.what() << std::endl;
-	}
 }

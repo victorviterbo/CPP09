@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Span.tpp                                           :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/16 17:54:21 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/30 14:59:11 by vviterbo         ###   ########.fr       */
+/*   Created: 2025/08/16 14:00:00 by victorviter       #+#    #+#             */
+/*   Updated: 2025/10/30 11:53:27 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-class Span;
+#pragma once
 
-template <typename T>
-void	Span::addNumber(T begin, T end)
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <list>
+#include <stack>
+#include <queue>
+#include <algorithm>
+
+template < typename T >
+typename T::iterator easyfind(T &container, int value)
 {
-	if (this->_size < this->_nums.size() + (end - begin))
-		throw std::overflow_error("Span container cannot add so many values");
-	for (T it = begin; it != end; it++)
+	typename T::iterator	it = container.begin();
+
+	while (it != container.end())
 	{
-		this->_nums.push_back(*it);
+		if (*it == value)
+			return (it);
+		++it;
 	}
+	return (it);
 }

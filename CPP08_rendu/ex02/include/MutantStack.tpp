@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MutantStack.tpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 19:00:20 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/30 14:51:07 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/29 10:44:38 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ MutantStack<T>::~MutantStack()
 {}
 
 template <typename T>
-typename MutantStack<T>::iterator		MutantStack<T>::begin()
+typename MutantStack<T>::iterator        MutantStack<T>::begin()
 {
 	return (this->c.begin());
 }
 
 template <typename T>
-typename MutantStack<T>::iterator		MutantStack<T>::end()
+typename MutantStack<T>::iterator        MutantStack<T>::end()
 {
 	return (this->c.end());
 }

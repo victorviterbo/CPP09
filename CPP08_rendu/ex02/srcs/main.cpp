@@ -6,19 +6,19 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:27:14 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/10/30 14:57:32 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/08/18 12:55:33 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
 #include <list>
-#include <vector>
 #include <iostream>
 
 int main()
 {
 	std::cout << "------------------ TEST ON STACK ------------------" << std::endl;
 	MutantStack<int>	mstack;
+
 	mstack.push(5);
 	mstack.push(17);
 	std::cout << mstack.top() << std::endl;
@@ -55,24 +55,5 @@ int main()
 	{
 		std::cout << *it << std::endl;
 	}
-
-
-	std::cout << "------------------ TESTS ON VECTOR ------------------" << std::endl;
-	std::vector<int>	v;
-
-	v.push_back(5);
-	v.push_back(17);
-	std::cout << v.back() << std::endl;
-	v.pop_back();
-	std::cout << v.size() << std::endl;
-	v.push_back(3);
-	v.push_back(5);
-	v.push_back(737);
-	v.push_back(0);
-	for (std::vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-	{
-		std::cout << *it << std::endl;
-	}
-
 	return 0;
 }
