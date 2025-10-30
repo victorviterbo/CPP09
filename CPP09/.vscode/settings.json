@@ -71,6 +71,8 @@
         "span": "cpp",
         "forward_list": "cpp",
         "map": "cpp",
-        "__tree": "cpp"
+        "__tree": "cpp",
+        "__verbose_trap": "cpp",
+        "__log_hardening_failure": "cpp"
     }
 }

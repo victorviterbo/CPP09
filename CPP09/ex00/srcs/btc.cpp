@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   btc.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/19 13:59:00 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/29 12:03:27 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "btc.hpp"
 
-std::list<daytrade>	load_db()
+std::map<time_t, double>	load_db()
 {
-	std::string			line;
-	std::list<daytrade>	data;
-	daytrade			dt;
-	std::ifstream 		db;
-	const char			*valstr;
-	char				*endPtr;
+	std::ifstream 				db;
+	std::string					line;
+	std::map<time_t, double>	trade;
+	std::string					date;
+	time_t						date_t;
+	float						value;
+	const char					*valstr;
+	char						*endPtr;
 
 	db.open("data.csv", std::ios::in);
 	if(!db)
@@ -30,23 +32,22 @@ std::list<daytrade>	load_db()
 	{
 		if (line.compare("date,exchange_rate") == 0)
 			continue ;
-		if (line.length() < 11)
+		if (line.length() < 10)
 			continue ;
-		if (!check_date(line.substr(0, 10)))	
-			throw std::runtime_error("DB is not properly formated");
-		dt.date = line.substr(0, 10);
+		date = line.substr(0, 10);
+		date_t = date_str_to_timet(date);
 		valstr = line.substr(11, line.length()).c_str();
-		dt.value = std::strtof(valstr, &endPtr);
-		if (valstr == endPtr)
+		value = std::strtod(valstr, &endPtr);
+		if (*endPtr != '\0')
 		{
 			throw std::runtime_error("Could not parse db");
 		}
-		data.push_back(dt);
+		trade[date_t] = value;
 	}
-	return (data);
+	return (trade);
 }
 
-int	input_processing(char *input, std::list<daytrade> data)
+int	input_processing(char *input, std::map<time_t, double> trade)
 {
 	std::ifstream 		inputf;
 	std::string			line;
@@ -63,14 +64,14 @@ int	input_processing(char *input, std::list<daytrade> data)
 	{
 		if (line.compare("date | value") == 0)
 			continue ;
-		ret = (process_line(line, data) || ret);
+		ret = (process_line(line, trade) || ret);
 	}
 	return (ret);
 }
 
-int	process_line(std::string line, std::list<daytrade> data)
+int	process_line(std::string line, std::map<time_t, double> trade)
 {
-	std::string			date;
+	time_t				date_t;
 	float				value;
 	const char			*valstr;
 	char				*endPtr;
@@ -80,42 +81,36 @@ int	process_line(std::string line, std::list<daytrade> data)
 		std::cout << "Error : bad input => " << line << std::endl;
 		return (1);
 	}
-	date = line.substr(0, 10);
-	if (!check_date(date))
+	if (!check_date(line.substr(0, 10)))
 	{
 		std::cout << "Error: bad input => " << line << std::endl;
 		return (1);
 	}
-	std::list<daytrade>::iterator it = data.begin();
-	std::list<daytrade>::iterator nextIt = data.begin();
-	nextIt++;
-	while (it != data.end())
+	valstr = line.substr(13, line.length()).c_str();
+	value = std::strtof(valstr, &endPtr);
+	if (*endPtr != '\0')
 	{
-		if ((nextIt != data.end() && date.compare((*nextIt).date) < 0)
-			|| (nextIt == data.end() &&  date.compare((*it).date) == 0))
-		{
-			valstr = line.substr(13, line.length()).c_str();
-			value = std::strtof(valstr, &endPtr);
-			if (endPtr == valstr)
-			{
-				std::cout << "Error: value could not be parsed." << std::endl;
-				return (1);
-			}
-			if (value < 0)
-			{
-				std::cout << "Error: not a positive number." << std::endl;
-				return (1);
-			}
-			if (value >= INT_MAX)
-			{
-				std::cout << "Error: too large a number." << std::endl;
-				return (1);
-			}
-			std::cout << date << " => " << value << " = " << value * (*it).value << std::endl;
-			return (0);
-		}
-		++it;
-		++nextIt;
+		std::cout << "last char parsed = >" << *endPtr << "<" << std::endl;
+		std::cout << "Error: value could not be parsed." << std::endl;
+		return (1);
+	}
+	if (value < 0)
+	{
+		std::cout << "Error: not a positive number: " << value << std::endl;
+		return (1);
+	}
+	if (value >= INT_MAX)
+	{
+		std::cout << "Error: too large a number." << std::endl;
+		return (1);
+	}
+	date_t = date_str_to_timet(line.substr(0, 10));
+	std::map<time_t, double>::iterator it = trade.upper_bound(date_t);
+	if (it != trade.end())
+	{
+		std::cout << "time given " << date_t << " found = " << it->first << std::endl;
+		std::cout << timet_to_date_str(it->first) << " => " << value << " = " << value * it->second << std::endl;
+		return (0);
 	}
 	std::cout << "Error: date is in the future." << std::endl;
 	return (1);
@@ -169,4 +164,34 @@ int	check_null_value(std::string value)
 			return (0);
 	}
 	return (1);
+}
+
+time_t	date_str_to_timet(std::string date)
+{
+	struct tm 		time_struct;
+	time_t			time;
+	
+	if (date.length() < 10)
+		return (0);
+	if (!check_date(date))
+		throw std::runtime_error("DB is not properly formated");
+	strptime(date.c_str(), "%Y-%m-%d", &time_struct);
+	time_struct.tm_hour = 12;  // Avoid midnight DST issues
+    time_struct.tm_min = 0;
+    time_struct.tm_sec = 0;
+    time_struct.tm_isdst = -1;
+	time = mktime(&time_struct);
+	//std::cout << date << " -> " << time << std::endl;
+	return (time);
+}
+
+std::string	timet_to_date_str(time_t time)
+{
+	char			buffer[11];
+	struct tm 		time_struct;
+
+	gmtime_r(&time, &time_struct);
+	strftime(buffer, sizeof(buffer), "%Y-%m-%d", &time_struct);
+	//std::cout << time << " -> " << std::string(buffer) << std::endl;
+	return (std::string(buffer));
 }

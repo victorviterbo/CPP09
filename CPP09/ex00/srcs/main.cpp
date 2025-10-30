@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/08/19 13:33:23 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:12:50 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int argc, char *argv[])
 {
-	std::list<daytrade>	data;
+	std::map<time_t, double>	trade;
 
 	if (argc != 2)
 	{
@@ -22,11 +22,11 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	try {
-		data = load_db();
+		trade = load_db();
 	}
 	catch (std::runtime_error &e){
 		std::cout << e.what() << std::endl;
 	}
-	input_processing(argv[1], data);
+	input_processing(argv[1], trade);
 	return (0);
 }
