@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:14:33 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/30 13:58:00 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:17:52 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(void)
 		std::cout << "Value found in container" << std::endl;
 	else
 		std::cout << "Value not in container" << std::endl;
-	if (easyfind(v, 4) != v.end())
+	if (easyfind(v, 8) != v.end())
 		std::cout << "Value found in container" << std::endl;
 	else
 		std::cout << "Value not in container" << std::endl;
@@ -35,5 +35,5 @@ int main(void)
 		std::cout << "Value found in container" << std::endl;
 	else
 		std::cout << "Value not in container" << std::endl;
-	return (0);
+return (0);
 }

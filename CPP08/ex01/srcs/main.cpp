@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:01:21 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/30 14:59:28 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:21:59 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(void)
 	std::cout << "shortest = " << cont.shortestSpan() << std::endl;
 	cont.printValues();
 
-	const int			Bigsize = 10000;
+	const int			Bigsize = 1000000;
 	Span				Bigcont(Bigsize);
 	for (double i = 0; i < Bigsize; ++i)
 	{

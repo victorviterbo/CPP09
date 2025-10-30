@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:01:24 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/30 14:47:53 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:23:10 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ unsigned int	Span::shortestSpan()
 	unsigned int		shortest;
 	std::vector<int>	arr_copy(this->_size);
 
-	if (this->_size == 0)
-		throw std::runtime_error("Span is empty");
-	else if (this->_size == 1)
-		return (0);
+	if (this->_size <= 1)
+		throw std::runtime_error("Span is not big enough  (< 2 values)");
 	arr_copy = this->_nums;
 	std::sort(arr_copy.begin(), arr_copy.end());
 	shortest = std::numeric_limits<unsigned int>::max();
@@ -64,8 +62,8 @@ unsigned int	Span::shortestSpan()
 
 unsigned int	Span::longestSpan()
 {
-	if (this->_size == 0)
-		throw std::runtime_error("Span is empty");
+	if (this->_size <= 1)
+		throw std::runtime_error("Span is not big enough  (< 2 values)");
 	return (*std::max_element(this->_nums.begin(), this->_nums.end()) - *std::min_element(this->_nums.begin(), this->_nums.end()));
 }
 
