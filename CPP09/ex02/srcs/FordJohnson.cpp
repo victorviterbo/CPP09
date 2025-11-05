@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/05 16:01:05 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:20:51 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 std::deque<int>	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mixed, unsigned int level)
 {
-	mixed = blockSort(mixed, level);
+	blockSort(mixed, level);
 	if (pow(2, level + 1) <= mixed.size())
 	{
 		main = recursiveMergeInsert(main, mixed, level + 1);
@@ -38,7 +38,7 @@ std::deque<int>	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mix
 	return (main);
 }
 
-std::deque<int>		blockSort(std::deque<int> mixed, unsigned int level)
+void	blockSort(std::deque<int> &mixed, unsigned int level)
 {
 
 	std::deque<int>					semiSorted;
@@ -53,7 +53,6 @@ std::deque<int>		blockSort(std::deque<int> mixed, unsigned int level)
 	semiSorted.resize(0);
 	while (idx_r < mixed.size())
 	{
-		//std::cout << "idx_l = " << idx_l << " idx_r = " << idx_r << std::endl;
 		r1_start = mixed.begin();
 		r2_start = mixed.begin();
 		r2_end = mixed.begin();
@@ -76,31 +75,45 @@ std::deque<int>		blockSort(std::deque<int> mixed, unsigned int level)
 	r2_end = mixed.begin();
 	std::advance(r2_end, semiSorted.size());
 	semiSorted.insert(semiSorted.end(), r2_end, mixed.end());
-	return (semiSorted);
+	mixed = semiSorted;
+	semiSorted.clear();
+	return ;
 }
+
 void	mergeInMain(std::deque<int> &main, std::deque<int> predecessors)
 {
-	size_t i = 0;
-	while (i < insertionOrder.size() && i <= 3 * predecessors.size())
+	std::deque<size_t>	main_mapping(0);
+	size_t				i = 0;
+	size_t				insert_pos;
+
+	for (unsigned int j = 0; j <= predecessors.size(); ++j)
+		main_mapping.push_back(j);
+	while (i < insertionOrder.size() && i < 2 * predecessors.size())
 	{
 		if (predecessors.size() < insertionOrder[i])
 		{
 			++i;
 			continue ;
 		}
-		insertIntoMain(main, predecessors[insertionOrder[i] - 1], insertionOrder[i] - 1 + i);
+		insert_pos = insertIntoMain(main, predecessors[insertionOrder[i] - 1], main_mapping[insertionOrder[i] - 1]);
+		for (unsigned int j = 0; j < main_mapping.size(); ++j)
+		{
+			if (main_mapping[j] < insert_pos)
+				continue ;
+			main_mapping[j] += 1;
+		}
 		++i;
 	}
 }
 
-void	insertIntoMain(std::deque<int> &main, int n, int indx)
+size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
 {
 	int							range;
 	std::deque<int>::iterator	it = main.begin();
 
-	range = std::min((indx + 1) / 2, static_cast<int>(main.size() - 1));
 	indx = indx / 2;
-	while (range > 0 && indx < static_cast<int>(main.size()))
+	range = indx;
+	while (range > 0 && 0 <= indx && indx < main.size())
 	{
 		range = range / 2;
 		if (main[indx] < n)
@@ -108,10 +121,14 @@ void	insertIntoMain(std::deque<int> &main, int n, int indx)
 		else
 			indx -= range;
 	}
+	if (indx < 0 || indx >= main.size())
+	{
+		std::cout << "INDX = " << indx << " range = " << range << std::endl;
+		exit(123);
+	}
 	if (main[indx] < n)
-		std::advance(it, indx + 1);
-	else
-		std::advance(it, indx);
+		indx += 1;
+	std::advance(it, indx);
 	main.insert(it, n);
-	return ;
+	return (indx);
 }
