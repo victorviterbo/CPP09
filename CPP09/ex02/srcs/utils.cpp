@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/05 13:51:52 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/05 15:24:28 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ bool	parseInput(std::deque<int> &vals, int argc, char *argv[])
 			std::cout << "Error: parsing of input failed on " << argv[i] << std::endl;
 			return (false);
 		}
-		/*if (std::find(vals.begin(), vals.end(), newval) != vals.end())
+		if (std::find(vals.begin(), vals.end(), newval) != vals.end())
 		{
 			std::cout << "Error: value appears more than once in the input " << newval << std::endl;
 			return (false);
-		}*/
+		}
 		vals.push_back(newval);
 	}
 	return (true);
@@ -53,7 +53,6 @@ std::deque<size_t>	getInsertionOrder(int listSize)
 	int					tmp;
 	std::deque<size_t>	indexOrder;	
 
-	std::cout << "listSize = " << listSize << std::endl;
 	while (J2 <= listSize)
 	{
 		for (int i = J2; i > J1; --i)
@@ -61,7 +60,6 @@ std::deque<size_t>	getInsertionOrder(int listSize)
 		tmp = J2;
 		J2 = J2 + 2 * J1;
 		J1 = tmp;
-		std::cout << " J1 = " << J1 << " J2 = " << J2 << std::endl;
 	}
 	for (int i = listSize; i > J1; --i)
 		indexOrder.push_back(i);
