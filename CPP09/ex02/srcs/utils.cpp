@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/04 17:18:13 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/05 13:51:52 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,19 @@ std::deque<size_t>	getInsertionOrder(int listSize)
 	int					tmp;
 	std::deque<size_t>	indexOrder;	
 
-	while (J2 < listSize)
+	std::cout << "listSize = " << listSize << std::endl;
+	while (J2 <= listSize)
 	{
 		for (int i = J2; i > J1; --i)
 			indexOrder.push_back(i);
 		tmp = J2;
 		J2 = J2 + 2 * J1;
 		J1 = tmp;
+		std::cout << " J1 = " << J1 << " J2 = " << J2 << std::endl;
 	}
 	for (int i = listSize; i > J1; --i)
 		indexOrder.push_back(i);
+	indexOrder.push_front(1);
 	return (indexOrder);
 }
 
