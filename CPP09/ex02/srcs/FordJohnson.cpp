@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/02 19:26:50 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/04 18:31:04 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ std::deque<int>	recursiveMergeInsert(std::deque<int> mixed, unsigned int level)
 	
 	idx_l = pow(2, level) - 1;
 	idx_r = pow(2, level + 1) - 1;
-	std::cout << "step 1 level = " << level << " idx_l = " << idx_l << " idx_r = " << idx_r << std::endl;
 	printDeque(mixed);
 	while (idx_r < mixed.size())
 	{
-		std::cout << "step 2" << std::endl;
 		if (mixed[idx_l] < mixed[idx_r])
 		{
 			semiSorted.insert(semiSorted.end(), mixed.begin() + idx_l - pow(2, level) + 1, mixed.begin() + idx_l + 1);
@@ -38,23 +36,23 @@ std::deque<int>	recursiveMergeInsert(std::deque<int> mixed, unsigned int level)
 		}
 		idx_l += pow(2, level + 1);
 		idx_r += pow(2, level + 1);
-		std::cout << "step 3" << std::endl;
 	}
-	semiSorted.insert(semiSorted.end(), mixed.begin() + idx_l, mixed.end());
-	std::cout << "step 4 level = " << level << std::endl;
+	semiSorted.insert(semiSorted.end(), mixed.begin() + idx_r - pow(2, level + 1) + 1, mixed.end());
 	if (pow(2, level + 1) <= mixed.size())
+	{
 		main = recursiveMergeInsert(semiSorted, level + 1);
+		mergeInMain(main, semiSorted, level - 1);
+	}
 	else
 	{
+		std::cout << "FINAL SEMISORTED" << std::endl;
+		printDeque(semiSorted);
+		std::cout << "FINISH SEMISORTED" << std::endl;
 		main.resize(0);
 		main.push_front(semiSorted[pow(2, level) - 1]);
 		if (semiSorted[pow(2, level - 1) - 1])
 			main.push_front(semiSorted[pow(2, level - 1) - 1]);
 	}
-	std::cout << "step 5" << std::endl;
-	mergeInMain(main, semiSorted, level - 1);
-	std::cout << "step final level = " << level << std::endl;
-	printDeque(main);
 	return (main);
 }
 
@@ -62,20 +60,23 @@ void	mergeInMain(std::deque<int> &main, std::deque<int> &semiSorted, unsigned in
 {
 	std::cout << "step 5.1" << std::endl;
 	printDeque(insertionOrder);
-	while (!insertionOrder.empty() && insertionOrder.front() < 2 * main.size())
+	int i = insertionOrder.size() - 1;
+	while (i >= 0)
 	{
-		std::cout << "step 5.2" << std::endl;
-		if (insertionOrder.front() >= semiSorted.size())
+		std::cout << "OK 2 " << i << std::endl;
+		if ((insertionOrder[i] - 1) * pow(2, level) >= semiSorted.size())
 		{
-			insertionOrder.pop_front();
+			--i;
 			continue ;
 		}
-		std::cout << "insertionOrder.front() = " << insertionOrder.front() << std::endl;
-		insertIntoMain(main, insertionOrder.front() * pow(2, level), insertionOrder.front());
-		insertionOrder.pop_front();
-		std::cout << "step 5.3" << std::endl;
+		std::cout << "level " << level << std::endl;
+		std::cout << "i " << i << std::endl;
+		std::cout << "inserting " << semiSorted[(insertionOrder[i] - 1) * pow(2, level)] << std::endl;
+		std::cout << "comming from index " << (insertionOrder[i] - 1) * pow(2, level) << std::endl;
+		insertIntoMain(main, semiSorted[(insertionOrder[i] - 1) * pow(2, level)], insertionOrder[i] + i);
+		std::cout << "OK" << std::endl;
+		--i;
 	}
-	std::cout << "step 5.4" << std::endl;
 }
 
 void	insertIntoMain(std::deque<int> &main, int n, int indx)

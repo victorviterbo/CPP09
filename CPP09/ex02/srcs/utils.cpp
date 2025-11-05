@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/02 19:25:49 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/04 17:18:13 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ bool	parseInput(std::deque<int> &vals, int argc, char *argv[])
 			std::cout << "Error: parsing of input failed on " << argv[i] << std::endl;
 			return (false);
 		}
-		if (std::find(vals.begin(), vals.end(), newval) != vals.end())
+		/*if (std::find(vals.begin(), vals.end(), newval) != vals.end())
 		{
 			std::cout << "Error: value appears more than once in the input " << newval << std::endl;
 			return (false);
-		}
+		}*/
 		vals.push_back(newval);
 	}
 	return (true);

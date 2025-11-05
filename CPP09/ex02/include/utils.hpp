@@ -6,7 +6,7 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:35:51 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/08/31 20:22:07 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/04 17:19:10 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 #include <algorithm>
 #include <deque>
 #include <map>
+
+/*
+typedef struct s_elem
+{
+	std::deque<struct s_elem>	winner;
+	std::deque<struct s_elem>	loser;
+}	t_elem;
+*/
 
 extern std::deque<size_t> insertionOrder; 
 
