@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/05 15:24:28 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:18:17 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,18 @@ std::deque<size_t>	getInsertionOrder(int listSize)
 	return (indexOrder);
 }
 
-void	printList(std::list<int> l)
-{
-	for (std::list<int>::iterator it = l.begin(); it != l.end(); ++it)
-		std::cout << (*it) << std::endl;
-	std::cout << std::endl;
-}
-
 void	printDeque(std::deque<int> d)
 {
 	for (std::deque<int>::iterator it = d.begin(); it != d.end(); ++it)
-		std::cout << *it << "\n";
+	{
+		std::cout << *it << " ";
+	}
 	std::cout << std::endl;
 }
 
 void	printDeque(std::deque<size_t> d)
 {
 	for (std::deque<size_t>::iterator it = d.begin(); it != d.end(); ++it)
-		std::cout << *it << "\n";
-	std::cout << std::endl;
-}
-
-void	printPairing(std::map<int, int> pairing)
-{
-	for (std::map<int, int>::iterator it = pairing.begin(); it != pairing.end(); ++it)
-		std::cout << "big = " << it->first << ", small = " << it->second << "\n";
+		std::cout << *it << " ";
 	std::cout << std::endl;
 }

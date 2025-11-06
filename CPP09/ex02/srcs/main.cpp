@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/05 16:05:02 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:33:33 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,12 @@ int main(int argc, char *argv[])
 
 	if (!parseInput(vals, argc, argv))
 		return (1);
-	//std::cout << "Before: ";
-    //for (std::deque<int>::iterator it = vals.begin(); it != vals.end(); ++it)
-	//	std::cout << *it << " ";
-	//std::cout << std::endl;
+	std::cout << "Before: ";
+    printDeque(vals);
 	insertionOrder = getInsertionOrder(vals.size());
-	//std::cout << "insertionOrder = " << std::endl;
-	//printDeque(insertionOrder);
-	getInsertionOrder(vals.size());
 	main.resize(0);
-	vals = recursiveMergeInsert(main, vals, 0);
+	recursiveMergeInsert(main, vals, 0);
 	std::cout << "After: ";
-	for (std::deque<int>::iterator it = vals.begin(); it != vals.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	printDeque(main);
+	return (0);
 }

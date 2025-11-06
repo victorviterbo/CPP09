@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   FordJohnson.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/05 17:20:51 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:34:56 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FordJohnson.hpp"
 
-std::deque<int>	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mixed, unsigned int level)
+void	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mixed, unsigned int level)
 {
 	blockSort(mixed, level);
 	if (pow(2, level + 1) <= mixed.size())
 	{
-		main = recursiveMergeInsert(main, mixed, level + 1);
+		recursiveMergeInsert(main, mixed, level + 1);
 		if (level == 0)
-			return (main);
+			return ;
 		std::deque<int>	predecessors;
 		size_t	idx = pow(2, level - 1) - 1;
 		while (idx < mixed.size())
@@ -35,7 +35,7 @@ std::deque<int>	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mix
 		if (mixed[pow(2, level - 1) - 1])
 			main.push_front(mixed[pow(2, level - 1) - 1]);
 	}
-	return (main);
+	return ;
 }
 
 void	blockSort(std::deque<int> &mixed, unsigned int level)
@@ -80,7 +80,7 @@ void	blockSort(std::deque<int> &mixed, unsigned int level)
 	return ;
 }
 
-void	mergeInMain(std::deque<int> &main, std::deque<int> predecessors)
+void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 {
 	std::deque<size_t>	main_mapping(0);
 	size_t				i = 0;
@@ -113,18 +113,13 @@ size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
 
 	indx = indx / 2;
 	range = indx;
-	while (range > 0 && 0 <= indx && indx < main.size())
+	while (range > 0 && indx < main.size())
 	{
 		range = range / 2;
 		if (main[indx] < n)
 			indx += range;
 		else
 			indx -= range;
-	}
-	if (indx < 0 || indx >= main.size())
-	{
-		std::cout << "INDX = " << indx << " range = " << range << std::endl;
-		exit(123);
 	}
 	if (main[indx] < n)
 		indx += 1;
