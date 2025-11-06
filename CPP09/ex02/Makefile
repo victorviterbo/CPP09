@@ -6,7 +6,7 @@
 #    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 15:55:45 by victorviter       #+#    #+#              #
-#    Updated: 2025/08/30 18:25:48 by victorviter      ###   ########.fr        #
+#    Updated: 2025/11/06 18:20:37 by victorviter      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = c++
 
 INCLUDE = -I./include/
 
-SRCS_MAIN_F =	main.cpp FordJohnson.cpp utils.cpp
+SRCS_MAIN_F =	main.cpp FordJohnson_deque.cpp utils_deque.cpp FordJohnson_vec.cpp utils_vec.cpp
 
 SRCS = $(addprefix srcs/, $(SRCS_MAIN_F))
 

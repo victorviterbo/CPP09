@@ -6,28 +6,50 @@
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/06 17:33:33 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/06 18:26:50 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.hpp"
-#include "FordJohnson.hpp"
+#include "utils_deque.hpp"
+#include "FordJohnson_deque.hpp"
+#include "utils_vec.hpp"
+#include "FordJohnson_vec.hpp"
+#include <ctime>
 
-std::deque<size_t> insertionOrder;
+std::deque<size_t> insertionOrder_d;
+std::vector<size_t> insertionOrder_v;
 
 int main(int argc, char *argv[])
 {
-	std::deque<int>		vals;
-	std::deque<int>		main(0, 0);
+	std::deque<int>		vals_d;
+	std::deque<int>		main_d(0, 0);
+	std::vector<int>	vals_v;
+	std::vector<int>	main_v(0, 0);
+	double				runtime;
 
-	if (!parseInput(vals, argc, argv))
+	if (!parseInput(vals_d, argc, argv))
 		return (1);
+
+	vals_v.assign(vals_d.begin(), vals_d.end());
+	
 	std::cout << "Before: ";
-    printDeque(vals);
-	insertionOrder = getInsertionOrder(vals.size());
-	main.resize(0);
-	recursiveMergeInsert(main, vals, 0);
+    printDeque(vals_d);
+	
+	insertionOrder_d = getInsertionOrder(vals_d.size());
+	insertionOrder_v.assign(insertionOrder_d.begin(), insertionOrder_d.end());
+	main_d.resize(0);
+	main_v.resize(0);
+
+    std::clock_t start = std::clock();
+	recursiveMergeInsert(main_d, vals_d, 0);
+	runtime = double(std::clock() - start) / CLOCKS_PER_SEC;
 	std::cout << "After: ";
-	printDeque(main);
+	printDeque(main_d);
+	std::cout << "Time to process a range of " << vals_d.size() << " with std::deque  : " << runtime << std::endl;
+
+	start = std::clock();
+	recursiveMergeInsert(main_v, vals_v, 0);
+	runtime = double(std::clock() - start) / CLOCKS_PER_SEC;
+	std::cout << "Time to process a range of " << vals_v.size() << " with std::vector : " << runtime << std::endl;
 	return (0);
 }

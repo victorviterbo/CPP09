@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
+/*   utils_deque.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/06 17:18:17 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/06 18:03:37 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.hpp"
+#include "utils_deque.hpp"
 
 bool	parseInput(std::deque<int> &vals, int argc, char *argv[])
 {

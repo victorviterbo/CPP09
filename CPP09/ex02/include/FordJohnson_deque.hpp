@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.hpp                                          :+:      :+:    :+:   */
+/*   FordJohnson_deque.hpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 12:35:51 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/06 17:17:11 by victorviter      ###   ########.fr       */
+/*   Created: 2025/08/19 13:02:59 by vviterbo          #+#    #+#             */
+/*   Updated: 2025/11/06 18:09:13 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <string>
-#include <vector>
-#include <cmath>
-#include <iostream>
-#include <algorithm>
-#include <deque>
+#include "utils_deque.hpp"
 
 
-extern std::deque<size_t> insertionOrder; 
 
-bool				parseInput(std::deque<int> &vals, int argc, char *argv[]);
-std::deque<size_t>	getInsertionOrder(int listSize);
-bool				isNonZero(std::string s);
-void				printDeque(std::deque<int> d);
-void				printDeque(std::deque<size_t> d);
+void		recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mixed, unsigned int level);
+void		blockSort(std::deque<int> &mixed, unsigned int level);
+void		mergeInMain(std::deque<int> &main, std::deque<int> &predecessors);
+size_t		insertIntoMain(std::deque<int> &main, int n, size_t indx);
