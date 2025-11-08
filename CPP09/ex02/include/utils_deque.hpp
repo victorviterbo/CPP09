@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:35:51 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/08 10:45:55 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:08:46 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,4 @@ std::deque<size_t>	getInsertionOrder(int listSize);
 bool				isNonZero(std::string s);
 void				printDeque(std::deque<int> d, size_t n);
 void				printDeque(std::deque<size_t> d, size_t n);
+void				checkSort(std::deque<int> d);

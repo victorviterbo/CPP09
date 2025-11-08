@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/08 10:53:46 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/08 11:43:57 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,16 @@ void	printDeque(std::deque<size_t> d, size_t n)
 	for (unsigned int i = d.size() - n / 2; i < d.size(); ++i)
 		std::cout << d[i] << " ";
 	std::cout << std::endl;
+}
+
+void	checkSort(std::deque<int> d)
+{
+	for (unsigned int i = 0; i < d.size() - 1; ++i)
+	{
+		if (d[i] >= d[i+1])
+		{
+			std::cout << "ERROR : deque not sorted" << std::endl;
+			exit(1) ;
+		}
+	}
 }

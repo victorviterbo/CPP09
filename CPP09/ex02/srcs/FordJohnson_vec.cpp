@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FordJohnson_vec.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/06 18:20:24 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/08 11:44:42 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ size_t	insertIntoMain(std::vector<int> &main, int n, size_t indx)
 	int							range;
 	std::vector<int>::iterator	it = main.begin();
 
-	indx = indx / 2;
+	indx = ceil(static_cast<double>(indx) / 2);
 	range = indx;
 	while (range > 0 && indx < main.size())
 	{
