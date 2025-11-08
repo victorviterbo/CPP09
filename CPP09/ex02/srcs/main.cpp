@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/06 18:26:50 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/08 10:55:52 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	vals_v.assign(vals_d.begin(), vals_d.end());
 	
 	std::cout << "Before: ";
-    printDeque(vals_d);
+    printDeque(vals_d, 10);
 	
 	insertionOrder_d = getInsertionOrder(vals_d.size());
 	insertionOrder_v.assign(insertionOrder_d.begin(), insertionOrder_d.end());
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	recursiveMergeInsert(main_d, vals_d, 0);
 	runtime = double(std::clock() - start) / CLOCKS_PER_SEC;
 	std::cout << "After: ";
-	printDeque(main_d);
+	printDeque(main_d, 10);
 	std::cout << "Time to process a range of " << vals_d.size() << " with std::deque  : " << runtime << std::endl;
 
 	start = std::clock();

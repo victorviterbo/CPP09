@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_deque.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/06 18:03:37 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/08 10:53:46 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,38 @@ std::deque<size_t>	getInsertionOrder(int listSize)
 	return (indexOrder);
 }
 
-void	printDeque(std::deque<int> d)
+void	printDeque(std::deque<int> d, size_t n)
 {
-	for (std::deque<int>::iterator it = d.begin(); it != d.end(); ++it)
+	if (n >= d.size())
 	{
-		std::cout << *it << " ";
+		for (std::deque<int>::iterator it = d.begin(); it != d.end(); ++it)
+			std::cout << *it << " ";
+		
+		std::cout << std::endl;
+		return ;
 	}
+	for (unsigned int i = 0; i < n / 2; ++i)
+		std::cout << d[i] << " ";
+	std::cout << "[...] ";
+	for (unsigned int i = d.size() - n / 2; i < d.size(); ++i)
+		std::cout << d[i] << " ";
 	std::cout << std::endl;
 }
 
-void	printDeque(std::deque<size_t> d)
+void	printDeque(std::deque<size_t> d, size_t n)
 {
-	for (std::deque<size_t>::iterator it = d.begin(); it != d.end(); ++it)
-		std::cout << *it << " ";
+	if (n >= d.size())
+	{
+		for (std::deque<size_t>::iterator it = d.begin(); it != d.end(); ++it)
+			std::cout << *it << " ";
+		
+		std::cout << std::endl;
+		return ;
+	}
+	for (unsigned int i = 0; i < n / 2; ++i)
+		std::cout << d[i] << " ";
+	std::cout << "[...] ";
+	for (unsigned int i = d.size() - n / 2; i < d.size(); ++i)
+		std::cout << d[i] << " ";
 	std::cout << std::endl;
 }
