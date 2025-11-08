@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:26:21 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/08 11:55:35 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/08 14:35:52 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int main(int argc, char *argv[])
 	std::cout << "After: ";
 	printDeque(main_d, 10);
 	std::cout << "Time to process a range of " << vals_d.size() << " with std::deque  : " << runtime << std::endl;
-	//return (0);
+	checkSort(main_d);
+	return (0);
 	start = std::clock();
 	recursiveMergeInsert(main_v, vals_v, 0);
 	runtime = double(std::clock() - start) / CLOCKS_PER_SEC;
 	std::cout << "Time to process a range of " << vals_v.size() << " with std::vector : " << runtime << std::endl;
-	checkSort(main_d);
 	checkSort(main_v);
 	return (0);
 }

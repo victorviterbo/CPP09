@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FordJohnson_deque.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/08 13:56:36 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/08 15:51:53 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,21 @@ void	blockSort(std::deque<int> &mixed, unsigned int level)
 
 void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 {
-	std::deque<size_t>				main_mapping(0);
+	std::deque<size_t>				insert_mapping(0);
 	std::deque<size_t>::iterator	it;
-	static std::deque<size_t>	main_global_mapping(0);
-	size_t						i = 0;
-	size_t						insert_pos;
+	static std::deque<size_t>		global_mapping(0);
+	size_t							i = 0;
+	size_t							insert_pos;
 
-	if (main_global_mapping.size() == 0)
+
+	for (unsigned int j = 0; j < predecessors.size(); ++j)
+		insert_mapping.push_back(j);
+	if (global_mapping.size() == 0)
 	{
-		for (unsigned int j = 0; j < main.size(); ++j)
-			main_mapping.push_back(j);
-		main_global_mapping = main_mapping;
+		std::cout << "My first mapping !" << std::endl;
+		printDeque(insert_mapping, 10);
+		global_mapping = insert_mapping;
 	}
-	else
-		main_mapping = main_global_mapping;
 	while (i < insertionOrder_d.size() && i < 2 * predecessors.size())
 	{
 		if (predecessors.size() < insertionOrder_d[i])
@@ -111,36 +112,41 @@ void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 			++i;
 			continue ;
 		}
-		std::cout << "inserting " << predecessors[main_mapping[insertionOrder_d[i] - 1]] << " insertionOrder_d[i] - 1 " << insertionOrder_d[i] - 1 << " main_mapping[insertionOrder_d[i] - 1]: " << main_mapping[insertionOrder_d[i] - 1] << std::endl;
-		insert_pos = insertIntoMain(main, predecessors[main_mapping[insertionOrder_d[i] - 1]], main_mapping[insertionOrder_d[i] - 1]);
-		for (unsigned int j = 0; j < main_mapping.size(); ++j)
+		std::cout << "inserting " << predecessors[global_mapping[insert_mapping[insertionOrder_d[i] - 1]]] << " insertionOrder_d[i] - 1 " << insertionOrder_d[i] - 1 << " global_mapping[insert_mapping[insertionOrder_d[i] - 1]] = " << global_mapping[insert_mapping[insertionOrder_d[i] - 1]] << std::endl;
+		insert_pos = insertIntoMain(main, predecessors[global_mapping[insert_mapping[insertionOrder_d[i] - 1]]], insert_mapping[insertionOrder_d[i] - 1]);
+		for (unsigned int j = 0; j < insert_mapping.size(); ++j)
 		{
-			if (main_mapping[j] >= insert_pos)
-				main_mapping[j] += 1;
+			if (insert_mapping[j] >= insert_pos)
+				insert_mapping[j] += 1;
 		}
-		for (unsigned int j = insert_pos; j < main_global_mapping.size(); ++j)
+		/*for (unsigned int j = insert_pos; j < global_mapping.size(); ++j)
 		{
-			//if (main_mapping[j] >= insert_pos)
-			main_global_mapping[j] += 1;
-			//if (main_global_mapping[j] > insert_pos)
-		}
+			//if (insert_mapping[j] >= insert_pos)
+			global_mapping[j] += 1;
+			//if (global_mapping[j] > insert_pos)
+		}*/
 		std::cout << "DAFFF2222 mapping global = " << std::endl;
-		printDeque(main_global_mapping, main_global_mapping.size());
-		std::cout << "mapping = " << std::endl;
-		printDeque(main_mapping, main_mapping.size());
-		it = main_global_mapping.begin() + insert_pos;
-		main_global_mapping.insert(it, insertionOrder_d[i] - 1);
+		printDeque(global_mapping, global_mapping.size());
+		std::cout << "mapping = " << std::endl;// 0 1 2 ->  0 0 1 2 -> 0 1 0 1 2  ->  2 0 1 0 1 2  4 1 2 1          2 0 4 1 3
+		printDeque(insert_mapping, insert_mapping.size()); // -> 49905 64438 68831 74759 89525
+		it = global_mapping.begin();
+		std::advance(it, insert_pos);
+		global_mapping.insert(it, global_mapping[insert_mapping[insertionOrder_d[i] - 1]]);
 		std::cout << "insert pos = " << insert_pos << std::endl;
 		std::cout << "DAFFF mapping global = " << std::endl;
-		printDeque(main_global_mapping, main_global_mapping.size());
+		printDeque(global_mapping, global_mapping.size());
+		std::cout << "DAFFF mapping = " << std::endl;
+		printDeque(insert_mapping, insert_mapping.size());
 		++i;
 	}
+	for (unsigned int k = 0; k < global_mapping.size(); ++k)
+		global_mapping[k] = global_mapping[k] * 2 + k % 2;
 	std::cout << "mapping global = " << std::endl;
-	printDeque(main_global_mapping, main_global_mapping.size());
+	printDeque(global_mapping, global_mapping.size());
 	std::cout << "main = " << std::endl;
 	printDeque(main, main.size());
-	//if (predecessors.size() > 2)
-	exit (0);
+	if (main.size() > 50)
+		exit (0);
 }
 
 size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
