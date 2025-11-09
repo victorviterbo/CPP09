@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/09 11:40:53 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:52:31 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,27 +213,23 @@ size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
 	// int							range;
 	std::deque<int>::iterator	it = main.begin();
 	size_t						rl = 0;
-	size_t						ru = ceil(static_cast<double>(indx) / 2);
-	size_t						tmp;
+	size_t						ru = indx;
+	size_t						mid;
 
 	// range = ceil(static_cast<double>(indx) / 2);
 	// indx = indx / 2;
 	// std::cout << "rl = " << rl << " ru = " << ru << std::endl;
-	while (rl < ru)
+	while (rl + 1 < ru)
 	{
 		// range = range / 2;
 		std::cout << "rl = " << rl << " ru = " << ru << std::endl;
-		if (main[ru] < n)
-		{
-			tmp = ru;
-			ru += (ru - rl + 1) / 2;
-			rl = tmp;
-		}
+		mid = (ru + rl) / 2;
+		if (main[mid] < n)
+			rl = mid;
 		else
-			ru -= (ru - rl + 1) / 2;
-		std::cout << "AFTER rl = " << rl << " ru = " << ru << std::endl;
+			ru = mid;
 	}
-	if (rl && main[rl - 1] > n)
+	/*if (rl && main[rl - 1] > n)
 	{
 		indx = rl - 1;
 		std::cout << "FUUUUUUUUUUUUUUUUCK" << std::endl;
@@ -244,6 +240,10 @@ size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
 		std::cout << "YOOOOOOOOOOOOOOOU" << std::endl;
 		indx = ru;
 	}
+	else
+		indx = rl;*/
+	if (main[rl] < n)
+		indx = rl + 1;
 	else
 		indx = rl;
 	std::advance(it, indx);
