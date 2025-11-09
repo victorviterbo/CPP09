@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:38:59 by victorviter       #+#    #+#             */
-/*   Updated: 2025/11/09 14:21:03 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/09 14:21:25 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <list>
 #include <iostream>
 #include <fstream>
-#include <climits>
 #include <limits>
 #include <string>
 #include <iterator>
