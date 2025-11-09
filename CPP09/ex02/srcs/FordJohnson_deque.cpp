@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/09 11:52:31 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:56:47 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mixed, unsigne
 	if (pow(2, level + 1) <= mixed.size())
 	{
 		recursiveMergeInsert(main, mixed, level + 1);
-		// if (level == 0)
-		// 	return ;
 		std::deque<int>	predecessors(0);
 		size_t	idx = pow(2, level) - 1;
 		while (idx < mixed.size())
@@ -44,29 +42,10 @@ void	recursiveMergeInsert(std::deque<int> &main, std::deque<int> &mixed, unsigne
 			predecessors.push_back(mixed[idx]);
 			idx += pow(2, level + 1);
 		}
-		std::cout << "Predecessors from level " << level << std::endl;
-		printDeque(predecessors, predecessors.size());
-		std::cout << "Main from level " << level << std::endl;
-		printDeque(main, main.size());
 		mergeInMain(main, predecessors);
 	}
 	else
-	{
-		std::cout << "Insertion Order" << std::endl;
-		printDeque(insertionOrder_d, insertionOrder_d.size());
-		std::cout << "mixed" << std::endl;
-		printDeque(mixed, mixed.size());
 		main.push_front(mixed[pow(2, level) - 1]);
-		return ;
-		std::deque<int>	predecessors(0);
-		size_t	idx = pow(2, level - 1) - 1;
-		while (idx < mixed.size())
-		{
-			predecessors.push_back(mixed[idx]);
-			idx += pow(2, level);
-		}
-		return ;
-	}
 	return ;
 }
 
@@ -134,8 +113,6 @@ void	initialInsert(std::deque<int> &main, std::deque<int> &predecessors, std::de
 		std::advance(it2, pos);
 		global_mapping.insert(it2, 2);
 	}
-	std::cout << it1 - main.begin() << std::endl;
-	printDeque(main, main.size());
 }
 
 void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
@@ -148,7 +125,6 @@ void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 	size_t							indx;
 	size_t							insert_pos;
 	size_t							main_orig_size = main.size();
-	// size_t						pred_orig_size = predecessors.size();
 
 	for (unsigned int j = 0; j < main.size() + predecessors.size(); ++j)
 		insert_mapping.push_back(j);
@@ -159,8 +135,6 @@ void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 	}
 	for (unsigned int k = 0; k < tmp_mapping.size(); ++k)
 		tmp_mapping[k] = global_mapping[k] * 2 + 1;
-	std::cout << "mapping is now" << std::endl;
-	printDeque(global_mapping, 100);
 	while (i < insertionOrder_d.size() && i < 3 * predecessors.size())
 	{
 		if (predecessors.size() < insertionOrder_d[i])
@@ -170,25 +144,14 @@ void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 		}
 		else if (predecessors.size() == insertionOrder_d[i] && predecessors.size() != main_orig_size)
 		{
-			std::cout << "path 1" << std::endl;
 			insert_pos = main.size();
 			indx = predecessors.size() - 1;
 		}
 		else
 		{
-			std::cout << "path 2" << std::endl;
 			insert_pos = insert_mapping[insertionOrder_d[i] - 1];
 			indx = global_mapping[insertionOrder_d[i] - 1];
 		}
-		std::cout << "ok" << std::endl;
-		std::cout << "inserting " << predecessors[indx] << std::endl;
-		std::cout << " insertionOrder_d[i] - 1 " << insertionOrder_d[i] - 1 << std::endl;
-		//std::cout << " global_mapping[insert_mapping[insertionOrder_d[i] - 1]] = " << global_mapping[insert_mapping[insertionOrder_d[i] - 1]] << std::endl;
-		std::cout << "indx = " << indx << std::endl;
-		std::cout << "insert params = " << std::endl;
-		printDeque(main, 100);
-		std::cout << "predecessors[indx] = " << predecessors[indx] << std::endl;
-		std::cout << "insert_pos " << insert_pos << std::endl;
 		insert_pos = insertIntoMain(main, predecessors[indx], insert_pos);
 		for (unsigned int j = 0; j < insert_mapping.size(); ++j)
 		{
@@ -204,8 +167,6 @@ void	mergeInMain(std::deque<int> &main, std::deque<int> &predecessors)
 		++i;
 	}
 	global_mapping = tmp_mapping;
-	//if (main.size() > 50 || main.size() != global_mapping.size() || hasDuplicate(global_mapping))
-	//exit (123);
 }
 
 size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
@@ -216,32 +177,14 @@ size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
 	size_t						ru = indx;
 	size_t						mid;
 
-	// range = ceil(static_cast<double>(indx) / 2);
-	// indx = indx / 2;
-	// std::cout << "rl = " << rl << " ru = " << ru << std::endl;
 	while (rl + 1 < ru)
 	{
-		// range = range / 2;
-		std::cout << "rl = " << rl << " ru = " << ru << std::endl;
 		mid = (ru + rl) / 2;
 		if (main[mid] < n)
 			rl = mid;
 		else
 			ru = mid;
 	}
-	/*if (rl && main[rl - 1] > n)
-	{
-		indx = rl - 1;
-		std::cout << "FUUUUUUUUUUUUUUUUCK" << std::endl;
-	}
-	else if (main[ru] < n)
-	{
-		
-		std::cout << "YOOOOOOOOOOOOOOOU" << std::endl;
-		indx = ru;
-	}
-	else
-		indx = rl;*/
 	if (main[rl] < n)
 		indx = rl + 1;
 	else
