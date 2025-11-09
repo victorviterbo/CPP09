@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_deque.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:32:10 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/08 11:43:57 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/08 22:12:52 by victorviter      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ bool	parseInput(std::deque<int> &vals, int argc, char *argv[])
 		newval = atoi(argv[i]);
 		if (!newval && isNonZero(argv[i]))
 		{
-			std::cout << "Error: parsing of input failed on " << argv[i] << std::endl;
+			std::cout << "KO: parsing of input failed on " << argv[i] << std::endl;
 			return (false);
 		}
 		if (std::find(vals.begin(), vals.end(), newval) != vals.end())
 		{
-			std::cout << "Error: value appears more than once in the input " << newval << std::endl;
+			std::cout << "KO: value appears more than once in the input " << newval << std::endl;
 			return (false);
 		}
 		vals.push_back(newval);
 	}
-	return (true);
+	return (vals.size());
 }
 
 bool	isNonZero(std::string s)
@@ -109,7 +109,7 @@ void	checkSort(std::deque<int> d)
 	{
 		if (d[i] >= d[i+1])
 		{
-			std::cout << "ERROR : deque not sorted" << std::endl;
+			std::cout << "KO : deque not sorted : " << d[i] << " before " << d[i+1] << std::endl;
 			exit(1) ;
 		}
 	}
