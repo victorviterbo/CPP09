@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FordJohnson_deque.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+        */
+/*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:02:46 by vviterbo          #+#    #+#             */
-/*   Updated: 2025/11/08 23:32:19 by victorviter      ###   ########.fr       */
+/*   Updated: 2025/11/09 11:40:53 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,20 +218,22 @@ size_t	insertIntoMain(std::deque<int> &main, int n, size_t indx)
 
 	// range = ceil(static_cast<double>(indx) / 2);
 	// indx = indx / 2;
-	std::cout << "rl = " << rl << " ru = " << ru << std::endl;
-	while (rl + 1 < ru)
+	// std::cout << "rl = " << rl << " ru = " << ru << std::endl;
+	while (rl < ru)
 	{
 		// range = range / 2;
+		std::cout << "rl = " << rl << " ru = " << ru << std::endl;
 		if (main[ru] < n)
 		{
 			tmp = ru;
-			ru += (ru - rl) / 2;
+			ru += (ru - rl + 1) / 2;
 			rl = tmp;
 		}
 		else
-			ru -= (ru - rl) / 2;
+			ru -= (ru - rl + 1) / 2;
+		std::cout << "AFTER rl = " << rl << " ru = " << ru << std::endl;
 	}
-	if (main[rl - 1] > n)
+	if (rl && main[rl - 1] > n)
 	{
 		indx = rl - 1;
 		std::cout << "FUUUUUUUUUUUUUUUUCK" << std::endl;

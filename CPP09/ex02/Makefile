@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: victorviterbo <victorviterbo@student.42    +#+  +:+       +#+         #
+#    By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/15 15:55:45 by victorviter       #+#    #+#              #
-#    Updated: 2025/11/08 22:40:41 by victorviter      ###   ########.fr        #
+#    Updated: 2025/11/09 11:34:38 by vviterbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PmergeMe
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror #-std=c++98
 CC = c++
 
 INCLUDE = -I./include/
