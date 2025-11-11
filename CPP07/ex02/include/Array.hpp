@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 11:57:55 by victorviter       #+#    #+#             */
-/*   Updated: 2025/10/28 14:36:34 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/10/28 17:01:42 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class Array {
 		Array(const Array<T> &other);
 		Array &operator=(const Array<T> &other);
 		T &operator[](int index);
+		const T &operator[](int index) const;
 	//DESTUCTORS
 		~Array();
 	//GETTERS

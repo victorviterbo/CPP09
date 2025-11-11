@@ -6,7 +6,7 @@
 /*   By: vviterbo <vviterbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:23:47 by victorviter       #+#    #+#             */
-/*   Updated: 2025/11/09 14:23:16 by vviterbo         ###   ########.fr       */
+/*   Updated: 2025/11/09 15:49:54 by vviterbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,25 +94,26 @@ int	process_line(std::string line, std::map<time_t, double> trade)
 		std::cout << "Error: value could not be parsed." << std::endl;
 		return (1);
 	}
-	if (value < 0)
+	if (value <= 0)
 	{
-		std::cout << "Error: not a positive number: " << value << std::endl;
+		std::cout << "Error: not a positive number." << std::endl;
 		return (1);
 	}
-	if (value >= std::numeric_limits<int>::max())
+	if (value >= 1000)
 	{
 		std::cout << "Error: too large a number." << std::endl;
 		return (1);
 	}
 	date_t = date_str_to_timet(line.substr(0, 10));
 	std::map<time_t, double>::iterator it = trade.upper_bound(date_t);
-	if (it != trade.end())
+	if (it == trade.begin())
 	{
-		std::cout << timet_to_date_str(it->first) << " => " << value << " = " << value * it->second << std::endl;
-		return (0);
+		std::cout << "Error: date is too far in the past." << std::endl;
+		return (1);
 	}
-	std::cout << "Error: date is in the future." << std::endl;
-	return (1);
+	--it;
+	std::cout << timet_to_date_str(date_t) << " => " << value << " = " << value * it->second << std::endl;
+	return (0);
 }
 
 int	check_date(std::string date)
@@ -175,12 +176,11 @@ time_t	date_str_to_timet(std::string date)
 	if (!check_date(date))
 		throw std::runtime_error("DB is not properly formated");
 	strptime(date.c_str(), "%Y-%m-%d", &time_struct);
-	time_struct.tm_hour = 12;  // Avoid midnight DST issues
+	time_struct.tm_hour = 12;
     time_struct.tm_min = 0;
     time_struct.tm_sec = 0;
     time_struct.tm_isdst = -1;
 	time = mktime(&time_struct);
-	//std::cout << date << " -> " << time << std::endl;
 	return (time);
 }
 
@@ -191,6 +191,5 @@ std::string	timet_to_date_str(time_t time)
 
 	gmtime_r(&time, &time_struct);
 	strftime(buffer, sizeof(buffer), "%Y-%m-%d", &time_struct);
-	//std::cout << time << " -> " << std::string(buffer) << std::endl;
 	return (std::string(buffer));
 }
